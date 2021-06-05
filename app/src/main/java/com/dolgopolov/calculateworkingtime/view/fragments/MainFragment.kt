@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
+import com.dolgopolov.calculateworkingtime.view.App
 import com.dolgopolov.calculateworkingtime.view.BaseFragment
 import com.dolgopolov.calculateworkingtime.view.custom_view.CalendarView
 import com.dolgopolov.calculateworkingtime.view_models.MainFragmentViewModel
+import javax.inject.Inject
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {
-    private val viewModel: MainFragmentViewModel by viewModels()
-    private lateinit var calendarView: CalendarView
+    @Inject lateinit var viewModel: MainFragmentViewModel
+    @Inject lateinit var calendarView: CalendarView
 
-    companion object {
-        fun newInstance() = MainFragment().apply {
-            arguments = Bundle().apply {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-            }
-        }
+        App.getInstance().appComponent.mainFragment().create().inject(this)
     }
 
     override fun onCreateView(
@@ -37,15 +37,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         context?.also {
-            calendarView = CalendarView(it)
             calendarView.init(binder.containerCalendar)
             calendarView.onPreviousMonthClick = {
-                viewModel.decreaseCurrentMonth()
-                viewModel.requestDays()
+                viewModel.requestDays(MainFragmentViewModel.DECREASE_MONTH)
             }
             calendarView.onNextMonthClick = {
-                viewModel.increaseCurrentMonth()
-                viewModel.requestDays()
+                viewModel.requestDays(MainFragmentViewModel.INCREASE_MONTH)
             }
 
             viewModel.getMonthName().observe(viewLifecycleOwner, { monthName ->

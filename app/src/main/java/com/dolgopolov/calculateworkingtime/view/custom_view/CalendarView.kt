@@ -9,8 +9,9 @@ import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import java.util.*
+import javax.inject.Inject
 
-class CalendarView(private val context: Context) {
+class CalendarView @Inject constructor(private val context: Context) {
     private var view: View? = null
     private var containerDays: ViewGroup? = null
     private var tvMonthAndYearDate: TextView? = null

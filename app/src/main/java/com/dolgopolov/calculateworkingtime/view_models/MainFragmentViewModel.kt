@@ -7,32 +7,33 @@ import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.repositories.DatabaseController
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class MainFragmentViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
     private val listDays = MutableLiveData<List<DayInformation>>()
     private val monthAndYearDateValue = MutableLiveData<String>()
-    private val deltaCurrentMonth = MutableLiveData(0)
 
     companion object {
-        private const val MONTHS_IN_YEAR = 12
+        const val INCREASE_MONTH = 1
+        const val DECREASE_MONTH = -1
+        const val CURRENT_MONTH = 0
     }
 
+    @Inject lateinit var calendarInstance: Calendar
 
-    fun requestDays() = viewModelScope.launch {
-        val instance = Calendar.getInstance()
+    fun requestDays(delta: Int = CURRENT_MONTH) = viewModelScope.launch {
+        calendarInstance.add(Calendar.MONTH, delta)
 
-        instance.add(Calendar.MONTH, deltaCurrentMonth.value!!)
-
-        val countDays = instance.getActualMaximum(Calendar.DAY_OF_MONTH)
-        val monthAndYearDate = DateParser.getMonthAndYearDate(instance)
+        val countDays = calendarInstance.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val monthAndYearDate = DateParser.getMonthAndYearDate(calendarInstance)
 
         val days = ArrayList<DayInformation>()
         val dbController = DatabaseController()
 
         for (i in 1..countDays) {
-            instance.set(Calendar.DAY_OF_MONTH, i)
-            val formattedDate = DateParser.getFormattedDate(instance)
+            calendarInstance.set(Calendar.DAY_OF_MONTH, i)
+            val formattedDate = DateParser.getFormattedDate(calendarInstance)
 
             var dayInformation = dbController.getDayInformationBy(formattedDate, getContext())
 
@@ -52,15 +53,6 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun getMonthName() = monthAndYearDateValue
-
-    fun increaseCurrentMonth() {
-        deltaCurrentMonth.value = deltaCurrentMonth.value!! + 1
-    }
-
-    fun decreaseCurrentMonth() {
-        deltaCurrentMonth.value = deltaCurrentMonth.value!! - 1
-    }
-
 
     private fun getContext() = getApplication<Application>().applicationContext
 }
