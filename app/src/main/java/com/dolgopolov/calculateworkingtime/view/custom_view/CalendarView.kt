@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
+import java.util.*
 
 class CalendarView(private val context: Context) {
     private var view: View? = null
@@ -42,16 +43,23 @@ class CalendarView(private val context: Context) {
     fun setDays(days: List<DayInformation>) {
         containerDays?.removeAllViews()
 
-        days.forEach {
+        days.forEach { dayInfo ->
             val dayView =
                 LayoutInflater.from(context).inflate(R.layout.item_calendar, containerDays, false)
             dayView.findViewById<TextView>(R.id.tv_date).text =
-                DateParser.getDateNumberFromFormattedDate(it.formattedDate)
+                DateParser.getDateNumberFromFormattedDate(dayInfo.formattedDate)
             dayView.findViewById<TextView>(R.id.tv_time).text =
-                DateParser.getWorkingTimeFormatted(it.listWorkingTime)
+                DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
+
+            markTodayDay(dayInfo, dayView)
 
             containerDays?.addView(dayView)
         }
+    }
+
+    fun markTodayDay(dayInfo: DayInformation, dayView: View) {
+        if(dayInfo.formattedDate == DateParser.getTodayFormattedDate())
+            dayView.setBackgroundResource(R.drawable.background_item_calendar_gradient)
     }
 
     fun onDestroyView() {

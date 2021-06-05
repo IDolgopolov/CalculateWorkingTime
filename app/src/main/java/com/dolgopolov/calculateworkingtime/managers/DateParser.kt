@@ -8,7 +8,7 @@ import kotlin.text.StringBuilder
 object DateParser {
     private const val DATE_DIVIDER = "."
 
-    fun getFormattedDate(calendar: Calendar) = StringBuilder()
+    fun getFormattedDate(calendar: Calendar = Calendar.getInstance()) = StringBuilder()
         .append(calendar.get(Calendar.DAY_OF_MONTH))
         .append(DATE_DIVIDER)
         .append(calendar.get(Calendar.MONTH) + 1)
@@ -41,4 +41,6 @@ object DateParser {
             .append(calendar.get(Calendar.YEAR))
             .toString()
     }
+
+    fun getTodayFormattedDate() = getFormattedDate()
 }
