@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="background_item_calendar_corner_radius">10dp</dimen>
+    <dimen name="item_calendar_size">60dp</dimen>
+    <dimen name="navigate_button_width">70dp</dimen>
+    <dimen name="navigate_button_height">40dp</dimen>
+    <dimen name="def_margin">14dp</dimen>
+    <dimen name="def_elevation">@dimen/padding_for_shadow</dimen>
+    <dimen name="padding_for_shadow">6dp</dimen>
+</resources>

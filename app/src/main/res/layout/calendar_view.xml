@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:padding="@dimen/padding_for_shadow"
+        >
+
+        <include
+            android:id="@+id/prev"
+            layout="@layout/button_navigation"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/def_text_color"
+            android:textSize="20sp"
+            tools:text="Май"
+            android:textAllCaps="true"
+            />
+
+        <include
+            android:id="@+id/next"
+            android:layout_alignParentEnd="true"
+            layout="@layout/button_navigation_next"
+            android:layout_height="@dimen/navigate_button_height"
+            android:layout_width="@dimen/navigate_button_width"/>
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/container_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/def_margin"
+        android:columnCount="5"
+        android:paddingBottom="@dimen/padding_for_shadow"
+        android:clipToPadding="false"
+        />
+</LinearLayout>
