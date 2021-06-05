@@ -2,6 +2,7 @@ package com.dolgopolov.calculateworkingtime.managers
 
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 import java.lang.StringBuilder
+import java.text.SimpleDateFormat
 import java.util.*
 
 object DateParser {
@@ -29,5 +30,9 @@ object DateParser {
             .toString()
     }
 
-    fun getWorkingTimeFormatted(list: List<WorkingTimeInformation>) = getWorkingTimeFormatted(list.sumOf { it.time })
+    fun getWorkingTimeFormatted(list: List<WorkingTimeInformation>) =
+        getWorkingTimeFormatted(list.sumOf { it.time })
+
+    fun getMonthNameStandalone(calendar: Calendar) =
+        SimpleDateFormat("LLLL", Locale.getDefault()).format(calendar.time)
 }

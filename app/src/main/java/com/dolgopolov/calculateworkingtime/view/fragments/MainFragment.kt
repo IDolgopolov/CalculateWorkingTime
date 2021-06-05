@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
 import com.dolgopolov.calculateworkingtime.view.BaseFragment
@@ -40,9 +41,20 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             calendarView = CalendarView(it)
             calendarView.init(binder.containerCalendar)
 
+
+            viewModel.getMonthName().observe(viewLifecycleOwner, { monthName ->
+                calendarView.setMonthName(monthName)
+            })
             viewModel.getDays().observe(viewLifecycleOwner, { days ->
                 calendarView.setDays(days)
             })
+
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        calendarView.onDestroyView()
     }
 }

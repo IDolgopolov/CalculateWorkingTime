@@ -12,24 +12,40 @@ import com.dolgopolov.calculateworkingtime.models.DayInformation
 import java.util.*
 
 class CalendarView(private val context: Context) {
-    private lateinit var view: View
-    private lateinit var containerDays: ViewGroup
+    private var view: View? = null
+    private var containerDays: ViewGroup? = null
+    private var tvMonthName: TextView? = null
 
     fun init(container: ViewGroup) {
         view = LayoutInflater.from(context).inflate(R.layout.calendar_view, container, false)
-        containerDays = view.findViewById(R.id.container_days)
+        containerDays = view?.findViewById(R.id.container_days)
+        tvMonthName = view?.findViewById(R.id.tv_month_name)
 
         container.addView(view)
     }
 
-    fun setDays(days: List<DayInformation>) {
-        containerDays.removeAllViews()
-        days.forEach {
-            val dayView = LayoutInflater.from(context).inflate(R.layout.item_calendar, containerDays, false)
-            dayView.findViewById<TextView>(R.id.tv_date).text = DateParser.getDateNumberFromFormattedDate(it.formattedDate)
-            dayView.findViewById<TextView>(R.id.tv_time).text = DateParser.getWorkingTimeFormatted(it.listWorkingTime)
+    fun setMonthName(monthName: String) {
+        tvMonthName?.text = monthName
+    }
 
-            containerDays.addView(dayView)
+    fun setDays(days: List<DayInformation>) {
+        containerDays?.removeAllViews()
+
+        days.forEach {
+            val dayView =
+                LayoutInflater.from(context).inflate(R.layout.item_calendar, containerDays, false)
+            dayView.findViewById<TextView>(R.id.tv_date).text =
+                DateParser.getDateNumberFromFormattedDate(it.formattedDate)
+            dayView.findViewById<TextView>(R.id.tv_time).text =
+                DateParser.getWorkingTimeFormatted(it.listWorkingTime)
+
+            containerDays?.addView(dayView)
         }
+    }
+
+    fun onDestroyView() {
+        view = null
+        containerDays = null
+        tvMonthName = null
     }
 }
