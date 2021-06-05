@@ -22,4 +22,10 @@
         <item name="android:layout_height">@dimen/navigate_button_height</item>
         <item name="android:elevation">@dimen/def_elevation</item>
     </style>
+
+    <style name="Buttons" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_height">@dimen/buttons_size</item>
+        <item name="android:layout_width">@dimen/buttons_size</item>
+        <item name="android:background">@drawable/background_button</item>
+    </style>
 </resources>

@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.MainFragment"
-    >
+    tools:context=".view.fragments.MainFragment">
 
     <FrameLayout
         android:id="@+id/container_calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/def_margin"
-        android:layout_marginTop="@dimen/def_margin"/>
+        android:layout_marginTop="@dimen/def_margin" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/def_margin"
+        android:divider="@drawable/divider"
+        android:showDividers="middle"
+        android:orientation="horizontal">
+
+        <include layout="@layout/button_settings" />
+
+
+        <include layout="@layout/button_statistic" />
+
+        <include layout="@layout/button_timer" />
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

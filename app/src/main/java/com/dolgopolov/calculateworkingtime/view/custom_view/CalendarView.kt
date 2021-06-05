@@ -12,7 +12,7 @@ import com.dolgopolov.calculateworkingtime.models.DayInformation
 class CalendarView(private val context: Context) {
     private var view: View? = null
     private var containerDays: ViewGroup? = null
-    private var tvMonthName: TextView? = null
+    private var tvMonthAndYearDate: TextView? = null
 
     var onPreviousMonthClick: (() -> Unit)? = null
     var onNextMonthClick: (() -> Unit)? = null
@@ -20,7 +20,7 @@ class CalendarView(private val context: Context) {
     fun init(container: ViewGroup) {
         view = LayoutInflater.from(context).inflate(R.layout.calendar_view, container, false)
         containerDays = view?.findViewById(R.id.container_days)
-        tvMonthName = view?.findViewById(R.id.tv_month_name)
+        tvMonthAndYearDate = view?.findViewById(R.id.tv_month_and_year)
         val bPrevMonth = view?.findViewById<View>(R.id.b_prev)
         val bNextMonth = view?.findViewById<View>(R.id.b_next)
 
@@ -35,8 +35,8 @@ class CalendarView(private val context: Context) {
         container.addView(view)
     }
 
-    fun setMonthName(monthName: String) {
-        tvMonthName?.text = monthName
+    fun setMonthAndYearDate(monthName: String) {
+        tvMonthAndYearDate?.text = monthName
     }
 
     fun setDays(days: List<DayInformation>) {
@@ -57,6 +57,6 @@ class CalendarView(private val context: Context) {
     fun onDestroyView() {
         view = null
         containerDays = null
-        tvMonthName = null
+        tvMonthAndYearDate = null
     }
 }

@@ -18,15 +18,17 @@
             layout="@layout/button_navigation"/>
 
         <TextView
-            android:id="@+id/tv_month_name"
+            android:id="@+id/tv_month_and_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/def_text_color"
             android:textSize="18sp"
             tools:text="Май"
+            android:gravity="center_horizontal"
             android:textAllCaps="true"
             />
+
 
         <include
             android:id="@+id/b_next"

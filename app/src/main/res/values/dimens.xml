@@ -7,4 +7,7 @@
     <dimen name="def_margin">14dp</dimen>
     <dimen name="def_elevation">@dimen/padding_for_shadow</dimen>
     <dimen name="padding_for_shadow">6dp</dimen>
+
+    <dimen name="buttons_size">70dp</dimen>
+    <dimen name="buttons_icon_size">40dp</dimen>
 </resources>

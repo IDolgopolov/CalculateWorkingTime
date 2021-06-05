@@ -5,18 +5,13 @@ import androidx.lifecycle.*
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.repositories.DatabaseController
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.abs
-import kotlin.math.sign
 
 class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
     private val listDays = MutableLiveData<List<DayInformation>>()
-    private val monthName = MutableLiveData<String>()
+    private val monthAndYearDateValue = MutableLiveData<String>()
     private val deltaCurrentMonth = MutableLiveData(0)
 
     companion object {
@@ -30,7 +25,7 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         instance.add(Calendar.MONTH, deltaCurrentMonth.value!!)
 
         val countDays = instance.getActualMaximum(Calendar.DAY_OF_MONTH)
-        val monthNameValue = DateParser.getMonthNameStandalone(instance)
+        val monthAndYearDate = DateParser.getMonthAndYearDate(instance)
 
         val days = ArrayList<DayInformation>()
         val dbController = DatabaseController()
@@ -47,7 +42,7 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
             days.add(dayInformation)
         }
         listDays.value = days
-        monthName.value = monthNameValue
+        monthAndYearDateValue.value = monthAndYearDate
     }
 
     fun getDays(): LiveData<List<DayInformation>> {
@@ -56,7 +51,7 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
         return listDays
     }
 
-    fun getMonthName() = monthName
+    fun getMonthName() = monthAndYearDateValue
 
     fun increaseCurrentMonth() {
         deltaCurrentMonth.value = deltaCurrentMonth.value!! + 1

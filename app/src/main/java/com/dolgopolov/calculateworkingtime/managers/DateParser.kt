@@ -1,9 +1,9 @@
 package com.dolgopolov.calculateworkingtime.managers
 
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
-import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.StringBuilder
 
 object DateParser {
     private const val DATE_DIVIDER = "."
@@ -33,6 +33,12 @@ object DateParser {
     fun getWorkingTimeFormatted(list: List<WorkingTimeInformation>) =
         getWorkingTimeFormatted(list.sumOf { it.time })
 
-    fun getMonthNameStandalone(calendar: Calendar) =
-        SimpleDateFormat("LLLL", Locale.getDefault()).format(calendar.time)
+    fun getMonthAndYearDate(calendar: Calendar): String {
+        val monthName = SimpleDateFormat("LLLL", Locale.getDefault()).format(calendar.time)
+        return StringBuilder()
+            .append(monthName)
+            .append("\n")
+            .append(calendar.get(Calendar.YEAR))
+            .toString()
+    }
 }

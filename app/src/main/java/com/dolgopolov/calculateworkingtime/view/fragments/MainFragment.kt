@@ -49,7 +49,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             }
 
             viewModel.getMonthName().observe(viewLifecycleOwner, { monthName ->
-                calendarView.setMonthName(monthName)
+                calendarView.setMonthAndYearDate(monthName)
             })
             viewModel.getDays().observe(viewLifecycleOwner, { days ->
                 calendarView.setDays(days)
