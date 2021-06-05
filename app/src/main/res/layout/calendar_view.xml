@@ -14,7 +14,7 @@
         >
 
         <include
-            android:id="@+id/prev"
+            android:id="@+id/b_prev"
             layout="@layout/button_navigation"/>
 
         <TextView
@@ -29,7 +29,7 @@
             />
 
         <include
-            android:id="@+id/next"
+            android:id="@+id/b_next"
             android:layout_alignParentEnd="true"
             layout="@layout/button_navigation_next"
             android:layout_height="@dimen/navigate_button_height"

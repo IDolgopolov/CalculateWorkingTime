@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
 import com.dolgopolov.calculateworkingtime.view.BaseFragment
@@ -40,7 +39,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         context?.also {
             calendarView = CalendarView(it)
             calendarView.init(binder.containerCalendar)
-
+            calendarView.onPreviousMonthClick = {
+                viewModel.decreaseCurrentMonth()
+                viewModel.requestDays()
+            }
+            calendarView.onNextMonthClick = {
+                viewModel.increaseCurrentMonth()
+                viewModel.requestDays()
+            }
 
             viewModel.getMonthName().observe(viewLifecycleOwner, { monthName ->
                 calendarView.setMonthName(monthName)

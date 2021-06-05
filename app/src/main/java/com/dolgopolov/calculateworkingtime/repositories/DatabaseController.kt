@@ -24,7 +24,7 @@ class DatabaseController {
 
     suspend fun getDayInformationBy(formattedDate: String, context: Context) =
         withContext(Dispatchers.IO) {
-            return@withContext ModelConverter.parse(
+            ModelConverter.parse(
                 getDB(context).workingTimeDao().getDayBy(formattedDate)
             )
         }
