@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
 import com.dolgopolov.calculateworkingtime.view.App
@@ -36,6 +41,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setToolbarVisibility(View.GONE)
+
         context?.also {
             calendarView.init(binder.containerCalendar)
             calendarView.onPreviousMonthClick = {
@@ -51,7 +58,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             viewModel.getDays().observe(viewLifecycleOwner, { days ->
                 calendarView.setDays(days)
             })
+        }
 
+        binder.bSetting.root.setOnClickListener {
+            navigateTo(R.id.action_mainFragment_to_settingFragment)
         }
     }
 

@@ -7,8 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
@@ -25,13 +24,13 @@
     <fragment
         android:id="@+id/oneDayFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.OneDayFragment"
-        android:label="fragment_one_day"
+        android:label="one day"
         tools:layout="@layout/fragment_one_day" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" >
+        android:label="settings"
+        tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_settingFragment_to_projectsFragment"
             app:destination="@id/projectsFragment" />
@@ -39,18 +38,18 @@
     <fragment
         android:id="@+id/timerFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.TimerFragment"
-        android:label="fragment_timer"
+        android:label="timer"
         tools:layout="@layout/fragment_timer" />
     <fragment
         android:id="@+id/projectsFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.ProjectsFragment"
-        android:label="fragment_projects"
+        android:label="projects"
         tools:layout="@layout/fragment_projects" />
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.StatisticsFragment"
-        android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" >
+        android:label="statistic"
+        tools:layout="@layout/fragment_statistics">
         <action
             android:id="@+id/action_statisticsFragment_to_projectsFragment"
             app:destination="@id/projectsFragment" />

@@ -22,7 +22,8 @@
         android:showDividers="middle"
         android:orientation="horizontal">
 
-        <include layout="@layout/button_settings" />
+        <include layout="@layout/button_settings"
+            android:id="@+id/b_setting"/>
 
 
         <include layout="@layout/button_statistic" />

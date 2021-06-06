@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/def_margin"
+    android:clipToPadding="false"
+    >
+
+    <include layout="@layout/button_navigation"
+        android:id="@+id/b_back"/>
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/def_text_color"
+        android:textSize="18sp"
+        tools:text="Май"
+        android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:layout_centerInParent="true"
+        />
+
+
+</RelativeLayout>
