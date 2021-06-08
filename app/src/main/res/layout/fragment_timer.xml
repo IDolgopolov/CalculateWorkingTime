@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/def_text_color"
-            tools:text="сегодняшняя дата: 02.05.2021"
+            android:text="@string/today_date"
             android:textSize="14sp"
             />
         <TextView
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/def_margin"
             android:textColor="@color/def_text_color"
-            tools:text="00:00:01"
+            android:text="@string/def_timer_value"
             android:textSize="60sp"
             />
 
@@ -62,10 +62,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/hint_text_color"
-        tools:text="сегодняшняя дата: 02.05.2021"
-        android:textSize="14sp"
+        android:text="@string/disclaimer"
+        android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/def_margin"
         android:gravity="center_horizontal"
         android:layout_marginBottom="@dimen/def_margin"
         />

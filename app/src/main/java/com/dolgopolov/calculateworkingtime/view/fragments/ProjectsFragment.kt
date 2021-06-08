@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentProjectsBinding
+import com.dolgopolov.calculateworkingtime.view.adapters.RecyclerListProjectsAdapter
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 
 
@@ -16,16 +17,14 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_projects, container, false)
+        val view = inflater.inflate(R.layout.fragment_projects, container, false)
+        _binder = FragmentProjectsBinding.bind(view)
+        return view
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        fun newInstance() =
-            ProjectsFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+        binder.recyclerView.adapter = RecyclerListProjectsAdapter()
     }
 }

@@ -8,10 +8,10 @@ import androidx.fragment.app.viewModels
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentTimerBinding
 import com.dolgopolov.calculateworkingtime.di.moduls.TimerFragmentModule
+import com.dolgopolov.calculateworkingtime.states.TimerState
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view_models.TimerFragmentViewModel
-import javax.inject.Inject
 
 class TimerFragment : BaseFragment<FragmentTimerBinding>() {
     private val viewModel: TimerFragmentViewModel by viewModels()
@@ -47,18 +47,34 @@ class TimerFragment : BaseFragment<FragmentTimerBinding>() {
 
     private fun setListeners() {
         binder.bTimerPlayPause.root.setOnClickListener {
-            viewModel.startTime()
+            viewModel.playPauseTimer()
         }
 
         binder.bTimerStop.root.setOnClickListener {
             viewModel.stopTimer()
         }
+
+        binder.bSelectProject.root.setOnClickListener {
+            navigateTo(R.id.action_timerFragment_to_projectsFragment)
+        }
     }
 
     private fun bind() {
-        viewModel.isTimerStarted.observe(viewLifecycleOwner) {
-            binder.bTimerStop.root.visibility = if (it) View.VISIBLE else View.GONE
-            binder.bTimerPlayPause.root.setImageResource(if(it) R.drawable.ic_pause else R.drawable.ic_play)
+        viewModel.isTimerStarted.observe(viewLifecycleOwner) { timerState ->
+            when(timerState) {
+                TimerState.Playing -> {
+                    binder.bTimerStop.root.visibility = View.VISIBLE
+                    binder.bTimerPlayPause.root.setImageResource(R.drawable.ic_pause)
+                }
+                TimerState.Paused -> {
+                    binder.bTimerStop.root.visibility = View.VISIBLE
+                    binder.bTimerPlayPause.root.setImageResource(R.drawable.ic_play)
+                }
+                TimerState.Stopped -> {
+                    binder.bTimerStop.root.visibility = View.GONE
+                    binder.bTimerPlayPause.root.setImageResource(R.drawable.ic_play)
+                }
+            }
         }
 
         viewModel.timePassedFormatted.observe(viewLifecycleOwner) {

@@ -8,5 +8,10 @@
     <string name="stop_timer">Остановить таймер</string>
     <string name="channel_name">Work Timer</string>
     <string name="channel_description">Display working timer</string>
+    <string name="def_timer_value">00:00:00</string>
+    <string name="today_date">сегодняшняя дата:</string>
+    <string name="project">Проект:</string>
+    <string name="disclaimer">если вы свернете этот экран, таймер продолжит отсчет и остановится в 00:00</string>
+    <string name="project_hint">Введите название проекта</string>
 
 </resources>

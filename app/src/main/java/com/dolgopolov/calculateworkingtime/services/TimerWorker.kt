@@ -11,26 +11,31 @@ import kotlinx.coroutines.channels.ticker
 import javax.inject.Inject
 import kotlin.concurrent.timer
 
-class TimerWorker @Inject constructor(private val context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+class TimerWorker @Inject constructor(private val context: Context, params: WorkerParameters) :
+    CoroutineWorker(context, params) {
     companion object {
         const val SECONDS_PASSED = "TIME_PASSED"
         const val UNIQUE_NAME = "TIMER_WORKER"
+        var isPaused = false
     }
 
     @ObsoleteCoroutinesApi
     override suspend fun doWork(): Result {
-        setForeground(ForegroundInfoCreator().createForegroundInfo(
-            context,
-            id
-        ))
-
+        isPaused = false
+        setForeground(
+            ForegroundInfoCreator().createForegroundInfo(
+                context,
+                id
+            )
+        )
 
         val ticker = ticker(1000L, 0L)
         var secondPassed = 0
-        for(tick in ticker) {
-            if(isStopped) break
+        for (tick in ticker) {
+            if (isStopped) break
 
-            secondPassed++
+            if (!isPaused)
+                secondPassed++
             setProgress(workDataOf(SECONDS_PASSED to secondPassed))
         }
         ticker.cancel()
