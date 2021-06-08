@@ -26,9 +26,11 @@
             android:id="@+id/b_setting"/>
 
 
-        <include layout="@layout/button_statistic" />
+        <include layout="@layout/button_statistic"
+            android:id="@+id/b_statistic"/>
 
-        <include layout="@layout/button_timer" />
+        <include layout="@layout/button_timer"
+            android:id="@+id/b_timer"/>
 
 
     </LinearLayout>

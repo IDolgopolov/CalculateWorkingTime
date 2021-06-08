@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="def_text_color">#CFCFCF</color>
+    <color name="hint_text_color">#CECFCFCF</color>
+
     <color name="icon_color">#E6E6E6</color>
     <color name="background_color">#212121</color>
 </resources>

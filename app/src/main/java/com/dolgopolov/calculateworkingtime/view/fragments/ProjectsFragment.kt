@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentProjectsBinding
-import com.dolgopolov.calculateworkingtime.view.BaseFragment
+import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 
 
 class ProjectsFragment : BaseFragment<FragmentProjectsBinding>() {

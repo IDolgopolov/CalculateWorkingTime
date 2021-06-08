@@ -2,6 +2,8 @@ package com.dolgopolov.calculateworkingtime.di.moduls
 
 import android.app.Application
 import android.content.Context
+import com.dolgopolov.calculateworkingtime.di.components.MainFragmentComponent
+import com.dolgopolov.calculateworkingtime.di.components.TimerFragmentComponent
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package com.dolgopolov.calculateworkingtime.view
+package com.dolgopolov.calculateworkingtime.view.base
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

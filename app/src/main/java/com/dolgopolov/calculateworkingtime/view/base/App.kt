@@ -1,14 +1,16 @@
-package com.dolgopolov.calculateworkingtime.view
+package com.dolgopolov.calculateworkingtime.view.base
 
 import android.app.Application
 import com.dolgopolov.calculateworkingtime.di.components.AppComponent
 import com.dolgopolov.calculateworkingtime.di.components.DaggerAppComponent
 import com.dolgopolov.calculateworkingtime.di.components.MainFragmentComponent
+import com.dolgopolov.calculateworkingtime.di.components.TimerFragmentComponent
 import com.dolgopolov.calculateworkingtime.di.moduls.AppModule
-import com.dolgopolov.calculateworkingtime.di.moduls.MainFragmentModule
 
 class App : Application() {
     lateinit var appComponent: AppComponent
+    lateinit var timerFragmentComponent: TimerFragmentComponent
+    lateinit var mainFragmentComponent: MainFragmentComponent
 
     companion object {
         lateinit var app: App

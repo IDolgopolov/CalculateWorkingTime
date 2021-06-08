@@ -1,31 +1,70 @@
 package com.dolgopolov.calculateworkingtime.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentTimerBinding
-import com.dolgopolov.calculateworkingtime.view.BaseFragment
+import com.dolgopolov.calculateworkingtime.di.moduls.TimerFragmentModule
+import com.dolgopolov.calculateworkingtime.view.base.App
+import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
+import com.dolgopolov.calculateworkingtime.view_models.TimerFragmentViewModel
+import javax.inject.Inject
 
 class TimerFragment : BaseFragment<FragmentTimerBinding>() {
+    private val viewModel: TimerFragmentViewModel by viewModels()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        App.getInstance().timerFragmentComponent = App.getInstance().appComponent
+            .timerFragment()
+            .requestModule(TimerFragmentModule(this))
+            .build()
+        App.getInstance().timerFragmentComponent.inject(this)
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_timer, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_timer, container, false)
+        _binder = FragmentTimerBinding.bind(view)
+        return view
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        fun newInstance(param1: String, param2: String) =
-            TimerFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+        setListeners()
+        bind()
     }
+
+    private fun setListeners() {
+        binder.bTimerPlayPause.root.setOnClickListener {
+            viewModel.startTime()
+        }
+
+        binder.bTimerStop.root.setOnClickListener {
+            viewModel.stopTimer()
+        }
+    }
+
+    private fun bind() {
+        viewModel.isTimerStarted.observe(viewLifecycleOwner) {
+            binder.bTimerStop.root.visibility = if (it) View.VISIBLE else View.GONE
+            binder.bTimerPlayPause.root.setImageResource(if(it) R.drawable.ic_pause else R.drawable.ic_play)
+        }
+
+        viewModel.timePassedFormatted.observe(viewLifecycleOwner) {
+            binder.tvTimePassed.text = it
+        }
+    }
+
+
 }

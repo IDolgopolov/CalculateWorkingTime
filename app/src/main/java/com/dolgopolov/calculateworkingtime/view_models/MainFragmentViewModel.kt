@@ -5,14 +5,22 @@ import androidx.lifecycle.*
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.repositories.DatabaseController
+import com.dolgopolov.calculateworkingtime.view.base.App
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class MainFragmentViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
+class MainFragmentViewModel(application: Application) : AndroidViewModel(application) {
     private val listDays = MutableLiveData<List<DayInformation>>()
     private val monthAndYearDateValue = MutableLiveData<String>()
+
+    init {
+        App.getInstance().mainFragmentComponent
+            .buildViewModel()
+            .build()
+            .inject(this)
+    }
 
     companion object {
         const val INCREASE_MONTH = 1

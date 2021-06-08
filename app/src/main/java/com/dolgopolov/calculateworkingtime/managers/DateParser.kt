@@ -1,5 +1,7 @@
 package com.dolgopolov.calculateworkingtime.managers
 
+import android.annotation.SuppressLint
+import android.text.format.DateFormat
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,4 +45,9 @@ object DateParser {
     }
 
     fun getTodayFormattedDate() = getFormattedDate()
+
+    @SuppressLint("SimpleDateFormat")
+    fun getFormattedTimePassed(secondsPassed: Int): String {
+        return DateFormat.format("HH:mm:ss", secondsPassed * 1000L).toString()
+    }
 }

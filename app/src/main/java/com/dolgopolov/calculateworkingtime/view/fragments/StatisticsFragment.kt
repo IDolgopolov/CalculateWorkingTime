@@ -1,13 +1,12 @@
 package com.dolgopolov.calculateworkingtime.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentStatisticsBinding
-import com.dolgopolov.calculateworkingtime.view.BaseFragment
+import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 
 
 class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {

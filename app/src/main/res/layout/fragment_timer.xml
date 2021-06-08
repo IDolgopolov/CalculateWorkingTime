@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragments.TimerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/def_margin">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/def_text_color"
+            tools:text="сегодняшняя дата: 02.05.2021"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:id="@+id/tv_time_passed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_margin"
+            android:textColor="@color/def_text_color"
+            tools:text="00:00:01"
+            android:textSize="60sp"
+            />
+
+        <Space
+            android:layout_height="@dimen/def_margin"
+            android:layout_width="0dp"
+            />
+
+        <include layout="@layout/button_select_project"
+            android:id="@+id/b_select_project" />
+
+        <Space
+            android:layout_height="@dimen/def_margin"
+            android:layout_width="0dp"
+            />
+
+        <include layout="@layout/button_timer_play_pause"
+            android:id="@+id/b_timer_play_pause"/>
+
+        <Space
+            android:layout_height="@dimen/def_margin"
+            android:layout_width="0dp"
+            />
+
+        <include layout="@layout/button_timer_stop"
+            android:id="@+id/b_timer_stop"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/hint_text_color"
+        tools:text="сегодняшняя дата: 02.05.2021"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/def_margin"
+        />
+
+
+</RelativeLayout>
