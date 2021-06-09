@@ -12,7 +12,7 @@
             android:id="@+id/action_mainFragment_to_settingFragment"
             app:destination="@id/settingFragment"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
+            />
         <action
             android:id="@+id/action_mainFragment_to_oneDayFragment"
             app:destination="@id/oneDayFragment"
@@ -24,8 +24,7 @@
         <action
             android:id="@+id/action_mainFragment_to_timerFragment"
             app:destination="@id/timerFragment"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/oneDayFragment"
@@ -50,7 +49,7 @@
             android:id="@+id/action_timerFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
             app:popUpTo="@id/timerFragment"
-            app:popUpToInclusive="true" />
+            />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"

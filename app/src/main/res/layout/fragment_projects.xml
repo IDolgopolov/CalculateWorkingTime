@@ -10,4 +10,5 @@
     android:paddingHorizontal="@dimen/def_margin"
     android:clipToPadding="false"
     android:clipChildren="false"
+    
     />

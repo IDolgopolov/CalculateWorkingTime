@@ -22,6 +22,10 @@ object ModelConverter {
     }
 
     fun parse(projectDB: ProjectEntity): Project {
-        return Project(projectDB.name)
+        return Project(projectDB.id, projectDB.name)
+    }
+
+    fun parse(project: Project) : ProjectEntity {
+        return ProjectEntity(project.id, project.name)
     }
 }

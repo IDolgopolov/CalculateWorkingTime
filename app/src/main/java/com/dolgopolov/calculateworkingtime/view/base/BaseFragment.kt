@@ -30,6 +30,10 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
         findNavController().navigate(id)
     }
 
+    protected fun popBackStack() {
+        findNavController().popBackStack()
+    }
+
     protected fun setToolbarVisibility(visibility: Int) {
         getToolbar()?.visibility = visibility
     }
@@ -44,7 +48,7 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
 
     private fun setToolbarBackButton() {
         getToolbar()?.findViewById<View>(R.id.b_back)?.setOnClickListener {
-            findNavController().popBackStack()
+            popBackStack()
         }
     }
 }

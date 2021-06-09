@@ -1,16 +1,21 @@
 package com.dolgopolov.calculateworkingtime.view_models
 
 import android.app.Application
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.work.*
 import com.dolgopolov.calculateworkingtime.managers.DateParser
+import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.services.TimerWorker
 import com.dolgopolov.calculateworkingtime.states.TimerState
 import com.dolgopolov.calculateworkingtime.view.base.App
+import com.dolgopolov.calculateworkingtime.view.fragments.ProjectsFragment
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
@@ -22,6 +27,7 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
 
     val timePassedFormatted = MutableLiveData<String>()
     val isTimerStarted = MutableLiveData(TimerState.Stopped)
+    val selectedProject = MutableLiveData<Project>()
 
     init {
         App.getInstance()
@@ -45,6 +51,14 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
 
     fun stopTimer() = viewModelScope.launch {
         workManager.cancelUniqueWork(TimerWorker.UNIQUE_NAME)
+    }
+
+    fun decodeSelectedProject(bundle: Bundle) {
+        val encodedProject = bundle.getString(ProjectsFragment.PROJECT_KEY)
+        if(encodedProject != null) {
+            val project = Json.decodeFromString<Project>(encodedProject)
+            selectedProject.value = project
+        }
     }
 
     private fun subscribe() {

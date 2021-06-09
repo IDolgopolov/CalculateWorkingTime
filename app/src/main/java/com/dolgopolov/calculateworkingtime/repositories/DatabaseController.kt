@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.dolgopolov.calculateworkingtime.managers.ModelConverter
 import com.dolgopolov.calculateworkingtime.models.DayInformation
+import com.dolgopolov.calculateworkingtime.models.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
@@ -28,4 +29,20 @@ class DatabaseController {
                 getDB(context).workingTimeDao().getDayBy(formattedDate)
             )
         }
+
+    suspend fun addProject(project: Project, context: Context) = withContext(Dispatchers.IO) {
+        getDB(context).workingTimeDao().add(
+            ModelConverter.parse(project)
+        )
+    }
+
+    suspend fun getAllProjects(context: Context) = withContext(Dispatchers.IO) {
+        getDB(context).workingTimeDao().getAllProjects().map { ModelConverter.parse(it) }
+    }
+
+    suspend fun deleteProject(project: Project, context: Context) = withContext(Dispatchers.IO) {
+        getDB(context).workingTimeDao().delete(
+            ModelConverter.parse(project)
+        )
+    }
 }

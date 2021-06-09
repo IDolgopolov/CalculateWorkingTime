@@ -13,4 +13,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun mainFragment(): MainFragmentComponent.Builder
     fun timerFragment(): TimerFragmentComponent.Builder
+    fun projectsFragment(): ProjectsFragmentComponent.Builder
 }

@@ -13,5 +13,7 @@
     <string name="project">Проект:</string>
     <string name="disclaimer">если вы свернете этот экран, таймер продолжит отсчет и остановится в 00:00</string>
     <string name="project_hint">Введите название проекта</string>
+    <string name="error_empty_name">Имя не может быть пустым</string>
+    <string name="space"> </string>
 
 </resources>
