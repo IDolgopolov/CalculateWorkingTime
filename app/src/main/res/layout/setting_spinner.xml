@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style="@style/ItemListProject"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingHorizontal="@dimen/def_margin"
+    android:paddingVertical="@dimen/def_margin"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/def_text_color"
+        android:textSize="@dimen/item_project_text_size"
+        android:layout_centerVertical="true"
+        android:text="@string/count_work_house_in_day"
+        />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_check"
+        android:backgroundTint="@color/def_text_color"
+        android:dropDownWidth="50dp"
+        />
+</RelativeLayout>

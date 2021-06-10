@@ -11,9 +11,9 @@
     <string name="def_timer_value">00:00:00</string>
     <string name="today_date">сегодняшняя дата:</string>
     <string name="project">Проект:</string>
-    <string name="disclaimer">если вы свернете этот экран, таймер продолжит отсчет и остановится в 00:00</string>
+    <string name="disclaimer">таймер будет продолжать отсчет, даже если вы закроете приложение</string>
     <string name="project_hint">Введите название проекта</string>
     <string name="error_empty_name">Имя не может быть пустым</string>
-    <string name="space"> </string>
-
+    <string name="space">\ </string>
+    <string name="count_work_house_in_day">Количество рабочих часов\nв сутки</string>
 </resources>

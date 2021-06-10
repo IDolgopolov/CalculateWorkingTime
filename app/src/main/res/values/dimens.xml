@@ -13,4 +13,5 @@
     <dimen name="projects_buttons_height">60dp</dimen>
     <dimen name="item_project_text_size">18sp</dimen>
     <dimen name="item_project_button_size">36dp</dimen>
+    <dimen name="def_text_size">16sp</dimen>
 </resources>
