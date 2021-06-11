@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.OneDayFragment">
+    tools:context=".view.fragments.OneDayFragment"
+    android:paddingHorizontal="@dimen/def_margin">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/item_calendar_for_one_day"
+        android:id="@+id/day_info"
+        android:layout_centerInParent="true"
+        android:layout_width="@dimen/item_calendar_one_day_size"
+        android:layout_height="@dimen/item_calendar_one_day_size"
+        />
+
+
+    <include layout="@layout/switch_is_day_off"
+        android:id="@+id/switch_is_day_off_view"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/item_project_button_size"
+        android:layout_marginBottom="@dimen/def_margin"/>
 
-</FrameLayout>
+</RelativeLayout>

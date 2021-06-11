@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.managers.ModelConverter
+import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 import kotlinx.coroutines.Dispatchers
@@ -48,9 +49,14 @@ class DatabaseImpl(context: Context) : AppDatabase {
     }
 
     override suspend fun addWorkingInfo(workingTimeInformation: WorkingTimeInformation) {
-        val dao = workingTimeDB.workingTimeDao()
         DateParser.splitWorkingTime(workingTimeInformation).forEach {
-            dao.add(ModelConverter.parse(it))
+            workingTimeDB.workingTimeDao().add(ModelConverter.parse(it))
         }
+    }
+
+    override suspend fun updateDayInfo(dayInfo: DayInformation) {
+        workingTimeDB.workingTimeDao().update(
+            ModelConverter.parse(dayInfo)
+        )
     }
 }

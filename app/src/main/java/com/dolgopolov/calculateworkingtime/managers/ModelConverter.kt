@@ -29,7 +29,7 @@ object ModelConverter {
         dayId: Int,
     ): WorkingTimeEntity {
         return WorkingTimeEntity(
-            1,
+            -1,
             dayId,
             workingInfo.project.id,
             workingInfo.seconds

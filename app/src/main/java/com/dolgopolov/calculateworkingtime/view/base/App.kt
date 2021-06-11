@@ -19,6 +19,7 @@ class App : Application() {
     lateinit var mainFragmentComponent: MainFragmentComponent
     lateinit var projectsFragmentComponent: ProjectsFragmentComponent
     lateinit var settingFragmentComponent: SettingFragmentComponent
+    lateinit var oneDayFragmentComponent: OneDayFragmentComponent
 
     @Inject
     lateinit var workerFactoriesContainer: WorkerFactoriesContainer

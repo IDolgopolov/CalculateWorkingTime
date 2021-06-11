@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.dolgopolov.calculateworkingtime.R
@@ -29,6 +30,10 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected fun navigateTo(id: Int) {
         findNavController().navigate(id)
+    }
+
+    protected fun navigateTo(action: NavDirections) {
+        findNavController().navigate(action)
     }
 
     protected fun popBackStack() {

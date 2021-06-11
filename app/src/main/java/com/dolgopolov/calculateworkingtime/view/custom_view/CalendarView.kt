@@ -18,6 +18,7 @@ class CalendarView @Inject constructor(private val context: Context) {
 
     var onPreviousMonthClick: (() -> Unit)? = null
     var onNextMonthClick: (() -> Unit)? = null
+    var onDaySelected: ((DayInformation) -> Unit)? = null
 
     fun init(container: ViewGroup) {
         view = LayoutInflater.from(context).inflate(R.layout.calendar_view, container, false)
@@ -54,11 +55,15 @@ class CalendarView @Inject constructor(private val context: Context) {
 
             markTodayDay(dayInfo, dayView)
 
+            dayView.setOnClickListener {
+                onDaySelected?.invoke(dayInfo)
+            }
+
             containerDays?.addView(dayView)
         }
     }
 
-    fun markTodayDay(dayInfo: DayInformation, dayView: View) {
+    private fun markTodayDay(dayInfo: DayInformation, dayView: View) {
         if(dayInfo.formattedDate == DateParser.getTodayFormattedDate())
             dayView.setBackgroundResource(R.drawable.background_item_calendar_gradient)
     }

@@ -17,6 +17,7 @@ interface AppComponent {
     fun timerFragment(): TimerFragmentComponent.Builder
     fun projectsFragment(): ProjectsFragmentComponent.Builder
     fun settingsFragment(): SettingFragmentComponent.Builder
+    fun oneDayFragment(): OneDayFragmentComponent.Builder
 
     fun inject(app: App)
 }

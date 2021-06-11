@@ -1,10 +1,12 @@
 package com.dolgopolov.calculateworkingtime.repositories.room_dao
 
 import androidx.room.*
+import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.DayEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.ProjectEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.WorkingTimeEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_relations.DayWithWorkingTime
+import com.dolgopolov.calculateworkingtime.models.db_models.room_relations.WorkingTimeWithProject
 
 @Dao
 interface WorkingTimeRepository {
@@ -24,6 +26,19 @@ interface WorkingTimeRepository {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun add(workingTime: WorkingTimeEntity)
+
+    @Update
+    suspend fun update(dayEntity: DayEntity)
+
+    @Update
+    suspend fun update(workingTime: WorkingTimeEntity)
+
+    suspend fun update(dayInfo: DayWithWorkingTime) {
+        update(dayInfo.dayEntity)
+        dayInfo.listWorkingTimesWithProject.forEach {
+            update(it.workingTimeEntity)
+        }
+    }
 
     suspend fun add(dayInfo: DayWithWorkingTime) {
         add(dayInfo.dayEntity)

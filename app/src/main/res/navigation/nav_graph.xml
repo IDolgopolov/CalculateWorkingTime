@@ -11,12 +11,13 @@
         <action
             android:id="@+id/action_mainFragment_to_settingFragment"
             app:destination="@id/settingFragment"
-            app:popUpTo="@id/mainFragment"
-            />
+            app:popUpTo="@id/mainFragment" />
         <action
             android:id="@+id/action_mainFragment_to_oneDayFragment"
             app:destination="@id/oneDayFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:popUpTo="@id/mainFragment">
+
+        </action>
         <action
             android:id="@+id/action_mainFragment_to_statisticsFragment"
             app:destination="@id/statisticsFragment"
@@ -30,7 +31,12 @@
         android:id="@+id/oneDayFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.OneDayFragment"
         android:label="one day"
-        tools:layout="@layout/fragment_one_day" />
+        tools:layout="@layout/fragment_one_day">
+        <argument
+            android:name="dayInfo"
+            app:argType="com.dolgopolov.calculateworkingtime.models.DayInformation"
+            />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.SettingFragment"
@@ -44,12 +50,11 @@
         android:id="@+id/timerFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.TimerFragment"
         android:label="timer"
-        tools:layout="@layout/fragment_timer" >
+        tools:layout="@layout/fragment_timer">
         <action
             android:id="@+id/action_timerFragment_to_projectsFragment"
             app:destination="@id/projectsFragment"
-            app:popUpTo="@id/timerFragment"
-            />
+            app:popUpTo="@id/timerFragment" />
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"

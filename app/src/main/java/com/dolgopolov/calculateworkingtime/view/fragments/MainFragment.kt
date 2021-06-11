@@ -79,6 +79,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         calendarView.onNextMonthClick = {
             viewModel.requestDays(MainFragmentViewModel.INCREASE_MONTH)
         }
+        calendarView.onDaySelected = { dayInfo ->
+            val action = MainFragmentDirections.actionMainFragmentToOneDayFragment(dayInfo)
+            navigateTo(action)
+        }
     }
 
     override fun onDestroyView() {
