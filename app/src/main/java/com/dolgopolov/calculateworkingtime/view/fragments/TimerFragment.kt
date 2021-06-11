@@ -95,6 +95,10 @@ class TimerFragment : BaseFragment<FragmentTimerBinding>() {
                 .append(getString(R.string.space))
                 .append(it.name)
         }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            showMessage(error)
+        }
     }
 
 

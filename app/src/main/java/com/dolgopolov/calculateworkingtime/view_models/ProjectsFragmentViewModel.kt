@@ -3,9 +3,10 @@ package com.dolgopolov.calculateworkingtime.view_models
 import android.app.Application
 import androidx.lifecycle.*
 import com.dolgopolov.calculateworkingtime.R
+import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectTransactionResultListener
 import com.dolgopolov.calculateworkingtime.models.Project
-import com.dolgopolov.calculateworkingtime.repositories.DatabaseController
+import com.dolgopolov.calculateworkingtime.repositories.DatabaseImpl
 import com.dolgopolov.calculateworkingtime.view.base.App
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
     val error = MutableLiveData<String>()
 
     @Inject
-    lateinit var database: DatabaseController
+    lateinit var database: AppDatabase
 
     @Inject
     lateinit var projectTransactionListener: ProjectTransactionResultListener
@@ -31,13 +32,13 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
 
 
     fun add(name: String) = viewModelScope.launch {
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             error.value = getApplication<Application>().getString(R.string.error_empty_name)
             return@launch
         }
 
         val project = Project(Random.nextInt(), name)
-        database.addProject(project, getApplication())
+        database.addProject(project)
         listProjects.value!!.add(project)
         projectTransactionListener.onAdded(project)
     }
@@ -49,7 +50,7 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun delete(project: Project) = viewModelScope.launch {
-        database.deleteProject(project, getApplication())
+        database.deleteProject(project)
         listProjects.value!!.remove(project)
         projectTransactionListener.onDeleted(project)
     }
@@ -59,7 +60,7 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
     }
 
     private fun requestProjectsFromBD() = viewModelScope.launch {
-        val list = database.getAllProjects(getApplication())
+        val list = database.getAllProjects()
         listProjects.value = ArrayList(list)
     }
 }

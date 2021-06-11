@@ -98,9 +98,7 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
-            view?.let {
-                Snackbar.make(it, error, Snackbar.LENGTH_LONG).show()
-            }
+            showMessage(error)
         }
     }
 

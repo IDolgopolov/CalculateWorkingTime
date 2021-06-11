@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.dolgopolov.calculateworkingtime.R
+import com.google.android.material.snackbar.Snackbar
 
 open class BaseFragment<T : ViewBinding> : Fragment() {
     protected var _binder: T? = null
@@ -36,6 +37,12 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected fun setToolbarVisibility(visibility: Int) {
         getToolbar()?.visibility = visibility
+    }
+
+    protected fun showMessage(message: String) {
+        view?.let {
+            Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun setToolbarLabel() {

@@ -1,44 +1,69 @@
 package com.dolgopolov.calculateworkingtime.services
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import androidx.work.*
-import com.dolgopolov.calculateworkingtime.R
+import com.dolgopolov.calculateworkingtime.models.Project
+import com.dolgopolov.calculateworkingtime.states.TimerState
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.ticker
-import javax.inject.Inject
-import kotlin.concurrent.timer
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
-class TimerWorker @Inject constructor(private val context: Context, params: WorkerParameters) :
-    CoroutineWorker(context, params) {
+class TimerWorker(
+    private val context: Context,
+    params: WorkerParameters
+) : CoroutineWorker(context, params) {
+
     companion object {
         const val SECONDS_PASSED = "TIME_PASSED"
         const val UNIQUE_NAME = "TIMER_WORKER"
-        var isPaused = false
+        var state = TimerState.Stopped
     }
+
+    private lateinit var project: Project
 
     @ObsoleteCoroutinesApi
     override suspend fun doWork(): Result {
-        isPaused = false
+        initInputData()
+
+        showForegroundNotification()
+        state = TimerState.Playing
+
+        val ticker = ticker(1000L, 0L)
+        var secondPassed = 0L
+        for (tick in ticker) {
+            if (state == TimerState.Stopped) {
+                ticker.cancel()
+                break
+            }
+
+            if (state != TimerState.Paused) {
+                secondPassed++
+                setProgress(workDataOf(SECONDS_PASSED to secondPassed))
+            }
+        }
+
+        return Result.success(
+            workDataOf(
+                SaveProgressWorker.PROJECT_KEY to inputData.getString(SaveProgressWorker.PROJECT_KEY),
+                SaveProgressWorker.SECONDS_PASS_KEY to secondPassed
+            )
+        )
+    }
+
+
+    private suspend fun showForegroundNotification() {
         setForeground(
             ForegroundInfoCreator().createForegroundInfo(
                 context,
                 id
             )
         )
+    }
 
-        val ticker = ticker(1000L, 0L)
-        var secondPassed = 0
-        for (tick in ticker) {
-            if (isStopped) break
-
-            if (!isPaused)
-                secondPassed++
-            setProgress(workDataOf(SECONDS_PASSED to secondPassed))
-        }
-        ticker.cancel()
-        return Result.success()
+    private fun initInputData() {
+        project = Json.decodeFromString(
+            inputData.getString(SaveProgressWorker.PROJECT_KEY)!!
+        )
     }
 }
