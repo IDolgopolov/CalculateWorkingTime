@@ -67,7 +67,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             calendarView.setMonthAndYearDate(monthName)
         })
         viewModel.getDays().observe(viewLifecycleOwner, { days ->
-            calendarView.setDays(days)
+            calendarView.setDays(days, viewModel.getCountWorkingHoursInDay())
         })
     }
 

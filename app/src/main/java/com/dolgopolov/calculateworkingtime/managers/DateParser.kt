@@ -10,6 +10,8 @@ import kotlin.text.StringBuilder
 
 object DateParser {
     private const val DATE_DIVIDER = "."
+    private const val HOURS_IN_DAY = 24L
+    private const val SECONDS_IN_HOUR = 60 * 60L
     private const val SECONDS_IN_DAY = 24 * 60 * 60L
 
     fun getFormattedDate(calendar: Calendar = Calendar.getInstance()) = StringBuilder()
@@ -106,5 +108,9 @@ object DateParser {
         listDays.add(lastPrevDayInfo)
 
         return listDays
+    }
+
+    fun calculateProgress(list: List<WorkingTimeInformation>, workingHoursInDay: Int): Float {
+        return (list.sumOf { it.seconds }.toFloat() / (workingHoursInDay * SECONDS_IN_HOUR)) * 100
     }
 }

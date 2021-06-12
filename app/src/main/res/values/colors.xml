@@ -12,4 +12,6 @@
 
     <color name="icon_color">#E6E6E6</color>
     <color name="background_color">#212121</color>
+    <color name="progress_color">#8BC34A</color>
+    <color name="background_progress_color">#919191</color>
 </resources>

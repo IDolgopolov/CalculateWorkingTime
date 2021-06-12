@@ -6,6 +6,7 @@ import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.repositories.DatabaseImpl
+import com.dolgopolov.calculateworkingtime.repositories.SettingRepository
 import com.dolgopolov.calculateworkingtime.view.base.App
 import kotlinx.coroutines.launch
 import java.util.*
@@ -31,6 +32,7 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     @Inject lateinit var calendarInstance: Calendar
     @Inject lateinit var database: AppDatabase
+    @Inject lateinit var settingDatabase: SettingRepository
 
     fun requestDays(delta: Int = CURRENT_MONTH) = viewModelScope.launch {
         calendarInstance.add(Calendar.MONTH, delta)
@@ -63,5 +65,5 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     fun getMonthName() = monthAndYearDateValue
 
-    private fun getContext() = getApplication<Application>().applicationContext
+    fun getCountWorkingHoursInDay() = settingDatabase.get(SettingRepository.WORKING_HOURS_IN_DAY, getApplication()).toInt()
 }

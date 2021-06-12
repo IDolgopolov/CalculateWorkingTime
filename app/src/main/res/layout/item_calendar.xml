@@ -8,31 +8,19 @@
     tools:layout_width="@dimen/item_calendar_size"
     android:background="@drawable/background_item_calendar"
     android:elevation="@dimen/def_elevation"
-    android:layout_margin="@dimen/padding_for_shadow"
-    >
+    android:layout_margin="@dimen/padding_for_shadow">
 
-    <View
-        android:id="@+id/progress_background"
-        android:layout_width="6dp"
+    <com.dolgopolov.calculateworkingtime.view.custom_view.VerticalProgressBar
+        android:id="@+id/progress_view"
+        android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:layout_marginVertical="5dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginEnd="6dp"
         android:background="@drawable/background_day_progress"
         android:backgroundTint="#575757"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:id="@+id/progress_front"
-        android:layout_width="6dp"
-        android:layout_height="30dp"
-        android:background="@drawable/background_day_progress"
-        app:layout_constraintBottom_toBottomOf="@id/progress_background"
-        app:layout_constraintEnd_toEndOf="@id/progress_background"
-        app:layout_constraintStart_toStartOf="@id/progress_background"
-        tools:backgroundTint="#18AA52" />
 
     <TextView
         android:id="@+id/tv_date"
@@ -43,8 +31,8 @@
         android:textColor="@color/def_text_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/tv_time"
-        app:layout_constraintEnd_toStartOf="@id/progress_background"
-        app:layout_constraintTop_toTopOf="@id/progress_background"
+        app:layout_constraintEnd_toStartOf="@id/progress_view"
+        app:layout_constraintTop_toTopOf="@id/progress_view"
         tools:text="25" />
 
     <TextView
@@ -53,7 +41,6 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:includeFontPadding="false"
-        android:lines="2"
         android:textColor="@color/def_text_color"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/tv_date"

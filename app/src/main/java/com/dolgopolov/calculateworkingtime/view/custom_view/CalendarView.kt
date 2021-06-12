@@ -42,7 +42,7 @@ class CalendarView @Inject constructor(private val context: Context) {
         tvMonthAndYearDate?.text = monthName
     }
 
-    fun setDays(days: List<DayInformation>) {
+    fun setDays(days: List<DayInformation>, workingHoursInDay: Int) {
         containerDays?.removeAllViews()
 
         days.forEach { dayInfo ->
@@ -52,6 +52,9 @@ class CalendarView @Inject constructor(private val context: Context) {
                 DateParser.getDateNumberFromFormattedDate(dayInfo.formattedDate)
             dayView.findViewById<TextView>(R.id.tv_time).text =
                 DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
+            dayView.findViewById<VerticalProgressBar>(R.id.progress_view).setProgress(
+                DateParser.calculateProgress(dayInfo.listWorkingTime, workingHoursInDay)
+            )
 
             markTodayDay(dayInfo, dayView)
 
