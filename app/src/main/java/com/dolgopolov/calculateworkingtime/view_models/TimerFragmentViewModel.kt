@@ -4,10 +4,14 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.work.*
-import androidx.work.impl.utils.WorkTimer
+import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.services.SaveProgressWorker
@@ -19,6 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.lang.StringBuilder
 import javax.inject.Inject
 
 class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
@@ -32,6 +37,7 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
     val isTimerStarted = MutableLiveData(TimerWorker.state)
     val selectedProject = MutableLiveData<Project>()
     val error = MutableLiveData<String>()
+    val todayDate = MutableLiveData<String>()
 
     init {
         App.getInstance()
@@ -72,6 +78,14 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
             val project = Json.decodeFromString<Project>(encodedProject)
             selectedProject.value = project
         }
+    }
+
+    fun getTodayDate() : LiveData<String> {
+        if(todayDate.value == null) {
+            val date = DateParser.getTodayFormattedDate()
+            todayDate.value = date
+        }
+        return todayDate
     }
 
     private fun subscribe() {

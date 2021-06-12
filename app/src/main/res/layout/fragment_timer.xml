@@ -15,11 +15,13 @@
         android:layout_marginHorizontal="@dimen/def_margin">
 
         <TextView
+            android:id="@+id/tv_today_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/def_text_color"
             android:text="@string/today_date"
-            android:textSize="14sp"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
             />
         <TextView
             android:id="@+id/tv_time_passed"

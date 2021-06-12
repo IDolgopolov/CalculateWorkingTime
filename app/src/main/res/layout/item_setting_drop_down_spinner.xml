@@ -7,6 +7,6 @@
     android:textSize="@dimen/item_project_text_size"
     android:textStyle="bold"
     tools:text="24"
-    android:background="@color/background_color">
+    android:background="@color/buttons_background_color">
 
 </TextView>

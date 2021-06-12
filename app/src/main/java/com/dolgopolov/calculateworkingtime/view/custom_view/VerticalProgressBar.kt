@@ -70,13 +70,8 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     }
 
     private fun calculateProgressView() {
-        if (progress == 0f) {
-            visibility = GONE
-            invalidate()
-            return
-        }
-
         progressHeight = when {
+            (progress == 0f) -> 0f
             (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS/100)
             (progress > maxProgress) -> height * 1f
             else -> height * (progress / maxProgress)
@@ -115,5 +110,13 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
             Path.Direction.CW
         )
         canvas?.drawPath(pathProgress, progressPaint)
+
+        canvas?.drawRect(
+            0f,
+            0f,
+            width.toFloat(),
+            height.toFloat(),
+            backgroundPaint
+        )
     }
 }

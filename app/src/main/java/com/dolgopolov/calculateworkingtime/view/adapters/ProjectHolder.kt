@@ -9,7 +9,7 @@ import com.dolgopolov.calculateworkingtime.models.Project
 class ProjectHolder(itemView: View) : ItemListProjectsHolder(itemView) {
     fun bind(project: Project, projectListener: ProjectListener) {
         itemView.findViewById<TextView>(R.id.tv_name).text = project.name
-        itemView.findViewById<View>(R.id.b_select).setOnClickListener {
+        itemView.setOnClickListener {
             projectListener.onSelect(project)
         }
         itemView.findViewById<View>(R.id.b_delete).setOnClickListener {

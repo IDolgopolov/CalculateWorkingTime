@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/oneDayFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.OneDayFragment"
-        android:label="one day"
+        android:label="@string/label_one_day"
         tools:layout="@layout/fragment_one_day">
         <argument
             android:name="dayInfo"
@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.SettingFragment"
-        android:label="settings"
+        android:label="@string/label_settings"
         tools:layout="@layout/fragment_setting">
         <action
             android:id="@+id/action_settingFragment_to_projectsFragment"
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/timerFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.TimerFragment"
-        android:label="timer"
+        android:label="@string/label_timer"
         tools:layout="@layout/fragment_timer">
         <action
             android:id="@+id/action_timerFragment_to_projectsFragment"
@@ -59,12 +59,12 @@
     <fragment
         android:id="@+id/projectsFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.ProjectsFragment"
-        android:label="projects"
+        android:label="@string/label_projects"
         tools:layout="@layout/fragment_projects" />
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.dolgopolov.calculateworkingtime.view.fragments.StatisticsFragment"
-        android:label="statistic"
+        android:label="@string/label_statistic"
         tools:layout="@layout/fragment_statistics">
         <action
             android:id="@+id/action_statisticsFragment_to_projectsFragment"

@@ -2,8 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="@dimen/background_item_calendar_corner_radius" />
     <gradient
-        android:endColor="#3C0E4D"
-        android:startColor="#361496"
+        android:endColor="@color/day_gradient_end_color"
+        android:centerColor="#100E4D"
+        android:startColor="@color/day_gradient_start_color"
         android:angle="-45"
         android:type="linear"/>
 </shape>

@@ -69,7 +69,7 @@ class TimerFragment : BaseFragment<FragmentTimerBinding>() {
 
     private fun bind() {
         viewModel.isTimerStarted.observe(viewLifecycleOwner) { timerState ->
-            when(timerState) {
+            when (timerState) {
                 TimerState.Playing -> {
                     binder.bTimerStop.root.visibility = View.VISIBLE
                     binder.bTimerPlayPause.root.setImageResource(R.drawable.ic_pause)
@@ -98,6 +98,14 @@ class TimerFragment : BaseFragment<FragmentTimerBinding>() {
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
             showMessage(error)
+        }
+
+        viewModel.getTodayDate().observe(viewLifecycleOwner) {
+            binder.tvTodayDate.text = StringBuilder()
+                .append(getString(R.string.today_date))
+                .append(getString(R.string.line_break))
+                .append(it)
+                .toString()
         }
     }
 

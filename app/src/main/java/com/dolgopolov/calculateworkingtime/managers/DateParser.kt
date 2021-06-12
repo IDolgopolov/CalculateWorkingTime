@@ -15,13 +15,10 @@ object DateParser {
     private const val SECONDS_IN_HOUR = 60 * 60L
     private const val SECONDS_IN_DAY = 24 * 60 * 60L
 
-    fun getFormattedDate(calendar: Calendar = Calendar.getInstance()) = StringBuilder()
-        .append(calendar.get(Calendar.DAY_OF_MONTH))
-        .append(DATE_DIVIDER)
-        .append(calendar.get(Calendar.MONTH) + 1)
-        .append(DATE_DIVIDER)
-        .append(calendar.get(Calendar.YEAR))
-        .toString()
+    fun getFormattedDate(calendar: Calendar = Calendar.getInstance()): String {
+        val format = SimpleDateFormat("dd${DATE_DIVIDER}MM${DATE_DIVIDER}yyyy", Locale.getDefault())
+        return format.format(calendar.time)
+    }
 
     fun getDateNumberFromFormattedDate(date: String) = date.substringBefore(DATE_DIVIDER)
 
