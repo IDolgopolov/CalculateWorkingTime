@@ -36,8 +36,8 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
     val timePassedFormatted = MutableLiveData<String>()
     val isTimerStarted = MutableLiveData(TimerWorker.state)
     val selectedProject = MutableLiveData<Project>()
-    val error = MutableLiveData<String>()
-    val todayDate = MutableLiveData<String>()
+    val error = MutableLiveData<String?>()
+    private val todayDate = MutableLiveData<String>()
 
     init {
         App.getInstance()
@@ -80,8 +80,8 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun getTodayDate() : LiveData<String> {
-        if(todayDate.value == null) {
+    fun getTodayDate(): LiveData<String> {
+        if (todayDate.value == null) {
             val date = DateParser.getTodayFormattedDate()
             todayDate.value = date
         }
@@ -92,14 +92,12 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
         workManager
             .getWorkInfosForUniqueWorkLiveData(TimerWorker.UNIQUE_NAME)
             .observe(fragment) { listInfo ->
-                viewModelScope.launch {
-                    listInfo.forEach { info ->
-                        val secondsPassed = info.progress.getLong(TimerWorker.SECONDS_PASSED, -1L)
-                        if (secondsPassed == -1L) return@launch
+                for(info in listInfo) {
+                    val secondsPassed = info.progress.getLong(TimerWorker.SECONDS_PASSED, -1L)
+                    if (secondsPassed == -1L) continue
 
-                        val formattedTimePassed = DateParser.getFormattedTimePassed(secondsPassed)
-                        timePassedFormatted.value = formattedTimePassed
-                    }
+                    val formattedTimePassed = DateParser.getFormattedTimePassed(secondsPassed)
+                    timePassedFormatted.value = formattedTimePassed
                 }
             }
     }

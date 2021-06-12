@@ -1,5 +1,6 @@
 package com.dolgopolov.calculateworkingtime.view.base
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,19 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
         view?.let {
             Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
         }
+    }
+
+    protected fun requestConfirmation(text: Int, onConfirm: () -> Unit) {
+        AlertDialog.Builder(context)
+            .setMessage(text)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                onConfirm()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+
+            }
+            .create()
+            .show()
     }
 
     private fun setToolbarLabel() {

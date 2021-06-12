@@ -37,11 +37,11 @@ object ModelConverter {
     }
 
     fun parse(projectDB: ProjectEntity): Project {
-        return Project(projectDB.id, projectDB.name)
+        return Project(projectDB.id, projectDB.name, projectDB.isDeleted)
     }
 
     fun parse(project: Project): ProjectEntity {
-        return ProjectEntity(project.id, project.name)
+        return ProjectEntity(project.id, project.name, project.isDeleted)
     }
 
     fun parse(dayInformation: DayInformation): DayWithWorkingTime {

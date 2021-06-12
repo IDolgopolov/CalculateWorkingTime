@@ -9,9 +9,11 @@
     <color name="progress_color">#8BC34A</color>
     <color name="background_progress_color">#4D000000</color>
 
-    <color name="buttons_background_color">#17FFFFFF</color>
+    <color name="buttons_background_color">#1AFFFFFF</color>
     <color name="day_background_color">#202A61</color>
 
     <color name="day_gradient_start_color">#361496</color>
     <color name="day_gradient_end_color">#3C0E4D</color>
+
+    <color name="drop_down_spinner_item_color">#6C6C6C</color>
 </resources>

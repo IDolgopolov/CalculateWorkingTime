@@ -6,5 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "projects")
 data class ProjectEntity(
     @PrimaryKey val id: Int,
-    val name: String
+    val name: String,
+    val isDeleted: Boolean
 )

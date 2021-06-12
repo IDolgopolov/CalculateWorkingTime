@@ -1,9 +1,6 @@
 package com.dolgopolov.calculateworkingtime.view.adapters
 
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.managers.DateParser
@@ -21,15 +18,19 @@ class DayInfoHolder {
             DateParser.getDateNumberFromFormattedDate(dayInfo.formattedDate)
 
         val tvWorkingTime = dayView.findViewById<TextView>(R.id.tv_time)
+        val progressBar = dayView.findViewById<VerticalProgressBar>(R.id.progress_view)
+
         when {
             dayInfo.listWorkingTime.isEmpty() -> tvWorkingTime.visibility = View.GONE
-            else -> tvWorkingTime.text =
-                DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
-        }
+            else -> {
+                tvWorkingTime.text =
+                    DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
 
-        dayView.findViewById<VerticalProgressBar>(R.id.progress_view).setProgress(
-            DateParser.calculateProgress(dayInfo.listWorkingTime, workingHoursInDay)
-        )
+                progressBar.setProgress(
+                    DateParser.calculateProgress(dayInfo.listWorkingTime, workingHoursInDay)
+                )
+            }
+        }
 
         markTodayDay(dayInfo, dayView)
 

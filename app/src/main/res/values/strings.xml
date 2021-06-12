@@ -23,4 +23,7 @@
     <string name="label_timer">таймер</string>
     <string name="label_projects">проекты</string>
     <string name="label_statistic">статистика</string>
+    <string name="cancel">отмена</string>
+    <string name="ok">подтвердить</string>
+    <string name="delete_project_or_not">Удалить проект? Статистика с ним сохранится, но выбрать его больше будет нелья</string>
 </resources>

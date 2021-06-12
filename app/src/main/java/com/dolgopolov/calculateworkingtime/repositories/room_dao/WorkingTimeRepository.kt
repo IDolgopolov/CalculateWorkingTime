@@ -33,6 +33,9 @@ interface WorkingTimeRepository {
     @Update
     suspend fun update(workingTime: WorkingTimeEntity)
 
+    @Update
+    suspend fun update(project: ProjectEntity)
+
     suspend fun update(dayInfo: DayWithWorkingTime) {
         update(dayInfo.dayEntity)
         dayInfo.listWorkingTimesWithProject.forEach {

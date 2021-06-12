@@ -75,7 +75,11 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
         }
 
         override fun onDelete(project: Project) {
-            viewModel.delete(project)
+            requestConfirmation(
+                R.string.delete_project_or_not,
+                onConfirm = {
+                    viewModel.delete(project)
+                })
         }
     }
 
@@ -114,7 +118,8 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
         setFragmentResult(
             RESULT_KEY, bundleOf(
                 PROJECT_KEY to Json.encodeToString(project)
-            ))
+            )
+        )
         popBackStack()
     }
 }

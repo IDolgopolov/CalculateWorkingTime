@@ -13,15 +13,19 @@ import javax.inject.Singleton
 
 @Module
 class AppModule(private val application: Application) {
+    private val database = DatabaseImpl(application)
+
     @Provides
     fun getApplication() = application
 
     @Provides
     fun getContext() : Context = application
 
+    @Singleton
     @Provides
-    fun getDatabase() : AppDatabase = DatabaseImpl(application)
+    fun getWorkerFactory() : WorkerFactoriesContainer = WorkerFactoriesContainer(database)
 
+    @Singleton
     @Provides
-    fun getWorkerFactory() : WorkerFactoriesContainer = WorkerFactoriesContainer(getDatabase())
+    fun getDatabase() : AppDatabase = database
 }

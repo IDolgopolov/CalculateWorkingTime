@@ -2,6 +2,7 @@ package com.dolgopolov.calculateworkingtime.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
@@ -17,21 +18,15 @@ class ForegroundInfoCreator {
     fun createForegroundInfo(context: Context, workerId: UUID): ForegroundInfo {
         val id = context.getString(R.string.notification_channel_id)
         val title = context.getString(R.string.notification_title)
-        val stop = context.getString(R.string.stop_timer)
 
-        val intent = WorkManager.getInstance(context)
-            .createCancelPendingIntent(workerId)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createChannel(context, id)
-        }
 
         val notification = NotificationCompat.Builder(context, id)
             .setContentTitle(title)
             .setTicker(title)
-            .setSmallIcon(android.R.drawable.ic_delete)
+            .setSmallIcon(R.drawable.ic_timer)
             .setOngoing(true)
-            .addAction(android.R.drawable.ic_delete, stop, intent)
             .build()
 
         return ForegroundInfo(Random().nextInt(), notification)

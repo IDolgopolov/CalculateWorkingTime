@@ -1,15 +1,18 @@
 package com.dolgopolov.calculateworkingtime.view.custom_view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
-import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.view.adapters.DayInfoHolder
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CalendarView @Inject constructor(private val context: Context) {
@@ -43,29 +46,36 @@ class CalendarView @Inject constructor(private val context: Context) {
         tvMonthAndYearDate?.text = monthName
     }
 
-    fun setDays(days: List<DayInformation>, workingHoursInDay: Int) {
-        containerDays?.removeAllViews()
+    suspend fun setDays(days: List<DayInformation>, workingHoursInDay: Int) =
+        withContext(Dispatchers.Main) {
+            containerDays?.removeAllViews()
 
-        val dayViewHolder = DayInfoHolder()
+            val views = ArrayList<View>()
+            withContext(Dispatchers.Default) {
+                val dayViewHolder = DayInfoHolder()
 
+                days.forEach { dayInfo ->
+                    val dayView = LayoutInflater.from(context)
+                        .inflate(
+                            R.layout.item_calendar,
+                            containerDays,
+                            false
+                        )
 
-        days.forEach { dayInfo ->
-            val dayView =
-                LayoutInflater.from(context)
-                    .inflate(R.layout.item_calendar, containerDays, false)
-
-            dayViewHolder.bind(
-                dayView,
-                dayInfo,
-                workingHoursInDay,
-                onClick = {
-                    onDaySelected?.invoke(dayInfo)
+                    dayViewHolder.bind(
+                        dayView,
+                        dayInfo,
+                        workingHoursInDay,
+                        onClick = {
+                            onDaySelected?.invoke(dayInfo)
+                        }
+                    )
+                    views.add(dayView)
                 }
-            )
+            }
 
-            containerDays?.addView(dayView)
+            views.forEach { containerDays?.addView(it) }
         }
-    }
 
     fun onDestroyView() {
         view = null

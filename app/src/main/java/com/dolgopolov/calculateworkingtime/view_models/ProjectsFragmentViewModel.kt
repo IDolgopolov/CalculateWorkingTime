@@ -37,7 +37,7 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
             return@launch
         }
 
-        val project = Project(Random.nextInt(), name)
+        val project = Project(Random.nextInt(), name, false)
         database.addProject(project)
         listProjects.value!!.add(project)
         projectTransactionListener.onAdded(project)
@@ -50,7 +50,7 @@ class ProjectsFragmentViewModel(application: Application) : AndroidViewModel(app
     }
 
     fun delete(project: Project) = viewModelScope.launch {
-        database.deleteProject(project)
+        database.markAsDeleted(project)
         listProjects.value!!.remove(project)
         projectTransactionListener.onDeleted(project)
     }

@@ -15,6 +15,7 @@ object DateParser {
     private const val SECONDS_IN_HOUR = 60 * 60L
     private const val SECONDS_IN_DAY = 24 * 60 * 60L
 
+
     fun getFormattedDate(calendar: Calendar = Calendar.getInstance()): String {
         val format = SimpleDateFormat("dd${DATE_DIVIDER}MM${DATE_DIVIDER}yyyy", Locale.getDefault())
         return format.format(calendar.time)
@@ -48,9 +49,8 @@ object DateParser {
 
     fun getTodayFormattedDate() = getFormattedDate()
 
-    @SuppressLint("SimpleDateFormat")
     fun getFormattedTimePassed(secondsPassed: Long): String {
-        val format = SimpleDateFormat("HH:mm:ss")
+        val format = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         format.timeZone = TimeZone.getTimeZone("GMT")
         return format.format(Date(secondsPassed * 1000))
     }

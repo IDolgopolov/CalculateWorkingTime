@@ -9,11 +9,22 @@ import com.dolgopolov.calculateworkingtime.models.Project
 class ProjectHolder(itemView: View) : ItemListProjectsHolder(itemView) {
     fun bind(project: Project, projectListener: ProjectListener) {
         itemView.findViewById<TextView>(R.id.tv_name).text = project.name
-        itemView.setOnClickListener {
-            projectListener.onSelect(project)
+
+        val bDelete = itemView.findViewById<View>(R.id.b_delete)
+        when (project.isDeleted) {
+            true -> {
+                bDelete.visibility = View.GONE
+            }
+            false -> {
+                bDelete.visibility = View.VISIBLE
+                bDelete.setOnClickListener {
+                    projectListener.onDelete(project)
+                }
+                itemView.setOnClickListener {
+                    projectListener.onSelect(project)
+                }
+            }
         }
-        itemView.findViewById<View>(R.id.b_delete).setOnClickListener {
-            projectListener.onDelete(project)
-        }
+
     }
 }

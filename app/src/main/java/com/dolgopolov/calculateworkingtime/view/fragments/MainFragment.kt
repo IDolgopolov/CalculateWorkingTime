@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
 import com.dolgopolov.calculateworkingtime.di.components.AppComponent
@@ -13,6 +14,7 @@ import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view.custom_view.CalendarView
 import com.dolgopolov.calculateworkingtime.view_models.MainFragmentViewModel
+import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -67,7 +69,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             calendarView.setMonthAndYearDate(monthName)
         })
         viewModel.getDays().observe(viewLifecycleOwner, { days ->
-            calendarView.setDays(days, viewModel.getCountWorkingHoursInDay())
+            lifecycleScope.launch {
+                calendarView.setDays(days, viewModel.getCountWorkingHoursInDay())
+            }
         })
     }
 

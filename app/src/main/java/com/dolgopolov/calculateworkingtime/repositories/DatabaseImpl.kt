@@ -8,18 +8,18 @@ import com.dolgopolov.calculateworkingtime.managers.ModelConverter
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import javax.inject.Singleton
 
 class DatabaseImpl(context: Context) : AppDatabase {
-    private val workingTimeDB: WorkingTimeDatabase
+    private lateinit var workingTimeDB: WorkingTimeDatabase
 
     init {
-        workingTimeDB = getDB(context)
+        getDB(context)
     }
 
-    private fun getDB(context: Context): WorkingTimeDatabase {
-        return Room.databaseBuilder(
+    private fun getDB(context: Context) = GlobalScope.launch {
+        workingTimeDB = Room.databaseBuilder(
             context,
             WorkingTimeDatabase::class.java, "working_time"
         ).build()
@@ -44,6 +44,13 @@ class DatabaseImpl(context: Context) : AppDatabase {
 
     override suspend fun deleteProject(project: Project) = withContext(Dispatchers.IO) {
         workingTimeDB.workingTimeDao().delete(
+            ModelConverter.parse(project)
+        )
+    }
+
+    override suspend fun markAsDeleted(project: Project) = withContext(Dispatchers.IO) {
+        project.isDeleted = true
+        workingTimeDB.workingTimeDao().update(
             ModelConverter.parse(project)
         )
     }
