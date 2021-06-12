@@ -19,6 +19,7 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     companion object {
         private const val DEF_PROGRESS_VALUE = 0f
         private const val DEF_MAX_PROGRESS = 100f
+        private const val MIN_PROGRESS = 20f
     }
 
     init {
@@ -69,8 +70,17 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     }
 
     private fun calculateProgressView() {
-        if (progress == 0f) visibility = GONE
-        progressHeight = height * (progress/maxProgress)
+        if (progress == 0f) {
+            visibility = GONE
+            invalidate()
+            return
+        }
+
+        progressHeight = when {
+            (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS/100)
+            (progress > maxProgress) -> height * 1f
+            else -> height * (progress / maxProgress)
+        }
         invalidate()
     }
 

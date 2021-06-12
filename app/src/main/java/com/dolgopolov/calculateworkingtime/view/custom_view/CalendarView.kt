@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
+import com.dolgopolov.calculateworkingtime.view.adapters.DayInfoHolder
 import java.util.*
 import javax.inject.Inject
 
@@ -45,30 +46,25 @@ class CalendarView @Inject constructor(private val context: Context) {
     fun setDays(days: List<DayInformation>, workingHoursInDay: Int) {
         containerDays?.removeAllViews()
 
+        val dayViewHolder = DayInfoHolder()
+
+
         days.forEach { dayInfo ->
             val dayView =
-                LayoutInflater.from(context).inflate(R.layout.item_calendar, containerDays, false)
-            dayView.findViewById<TextView>(R.id.tv_date).text =
-                DateParser.getDateNumberFromFormattedDate(dayInfo.formattedDate)
-            dayView.findViewById<TextView>(R.id.tv_time).text =
-                DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
-            dayView.findViewById<VerticalProgressBar>(R.id.progress_view).setProgress(
-                DateParser.calculateProgress(dayInfo.listWorkingTime, workingHoursInDay)
+                LayoutInflater.from(context)
+                    .inflate(R.layout.item_calendar, containerDays, false)
+
+            dayViewHolder.bind(
+                dayView,
+                dayInfo,
+                workingHoursInDay,
+                onClick = {
+                    onDaySelected?.invoke(dayInfo)
+                }
             )
-
-            markTodayDay(dayInfo, dayView)
-
-            dayView.setOnClickListener {
-                onDaySelected?.invoke(dayInfo)
-            }
 
             containerDays?.addView(dayView)
         }
-    }
-
-    private fun markTodayDay(dayInfo: DayInformation, dayView: View) {
-        if(dayInfo.formattedDate == DateParser.getTodayFormattedDate())
-            dayView.setBackgroundResource(R.drawable.background_item_calendar_gradient)
     }
 
     fun onDestroyView() {

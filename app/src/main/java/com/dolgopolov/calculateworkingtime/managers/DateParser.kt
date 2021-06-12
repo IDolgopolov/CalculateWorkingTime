@@ -11,6 +11,7 @@ import kotlin.text.StringBuilder
 object DateParser {
     private const val DATE_DIVIDER = "."
     private const val HOURS_IN_DAY = 24L
+    private const val SECONDS_IN_MINUTE = 60L
     private const val SECONDS_IN_HOUR = 60 * 60L
     private const val SECONDS_IN_DAY = 24 * 60 * 60L
 
@@ -24,9 +25,9 @@ object DateParser {
 
     fun getDateNumberFromFormattedDate(date: String) = date.substringBefore(DATE_DIVIDER)
 
-    fun getWorkingTimeFormatted(timeMillis: Long): String {
-        val hours = timeMillis / (1000 * 60 * 60)
-        val minutes = (timeMillis - hours * 60 * 60 * 1000) / (1000 * 60)
+    fun getWorkingTimeFormatted(timeSeconds: Long): String {
+        val hours = timeSeconds / SECONDS_IN_HOUR
+        val minutes = (timeSeconds - hours * SECONDS_IN_HOUR) / SECONDS_IN_MINUTE
         return StringBuilder()
             .append(hours)
             .append("h")
@@ -75,8 +76,8 @@ object DateParser {
         //HOW MANY WORK TODAY
         val now = Calendar.getInstance()
         val secondsPassToday = (now.get(Calendar.SECOND) +
-                now.get(Calendar.MINUTE) * 60L +
-                now.get(Calendar.HOUR) * 60 * 60)
+                now.get(Calendar.MINUTE) * SECONDS_IN_MINUTE +
+                now.get(Calendar.HOUR) * SECONDS_IN_HOUR)
         val workingTimeInfoToday =
             WorkingTimeInformation(info.project, secondsPassToday)
         listDays.add(DayInformation(getTodayFormattedDate(), listOf(workingTimeInfoToday)))

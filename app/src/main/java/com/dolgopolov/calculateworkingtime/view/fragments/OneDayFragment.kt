@@ -9,9 +9,11 @@ import androidx.navigation.fragment.navArgs
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentOneDayBinding
 import com.dolgopolov.calculateworkingtime.managers.DateParser
+import com.dolgopolov.calculateworkingtime.view.adapters.DayInfoHolder
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view_models.OneDayFragmentViewModel
+import java.net.DatagramPacket
 
 
 class OneDayFragment : BaseFragment<FragmentOneDayBinding>() {
@@ -50,11 +52,15 @@ class OneDayFragment : BaseFragment<FragmentOneDayBinding>() {
     }
 
     private fun observe() {
+        val dayViewHolder = DayInfoHolder()
+
         viewModel.dayInformation.observe(viewLifecycleOwner) {
-            binder.dayInfo.tvDate.text =
-                DateParser.getDateNumberFromFormattedDate(it.formattedDate)
-            binder.dayInfo.tvTime.text =
-                DateParser.getWorkingTimeFormatted(it.listWorkingTime)
+            dayViewHolder.bind(
+                binder.dayInfo.root,
+                it,
+                viewModel.getCountWorkingHoursInDay()
+            )
+
             if (binder.switchIsDayOffView.switchIsDayOff.isChecked != it.isDayOff)
                 binder.switchIsDayOffView.switchIsDayOff.isChecked = it.isDayOff
         }
