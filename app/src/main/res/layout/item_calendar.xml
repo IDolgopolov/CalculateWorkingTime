@@ -5,10 +5,10 @@
     android:layout_width="0dp"
     android:layout_height="@dimen/item_calendar_size"
     android:layout_columnWeight="1"
-    tools:layout_width="@dimen/item_calendar_size"
+    android:layout_margin="@dimen/padding_for_shadow"
     android:background="@drawable/background_item_calendar"
     android:elevation="@dimen/def_elevation"
-    android:layout_margin="@dimen/padding_for_shadow">
+    tools:layout_width="@dimen/item_calendar_size">
 
     <com.dolgopolov.calculateworkingtime.view.custom_view.VerticalProgressBar
         android:id="@+id/progress_view"
@@ -41,8 +41,8 @@
         android:includeFontPadding="false"
         android:textColor="@color/def_text_color"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_date"
         app:layout_constraintBottom_toBottomOf="@id/progress_view"
+        app:layout_constraintEnd_toEndOf="@id/tv_date"
         tools:text="7h\n15m" />
 
 

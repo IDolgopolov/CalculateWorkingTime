@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,53 +8,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:layout_marginHorizontal="@dimen/def_margin">
+        android:layout_marginHorizontal="@dimen/def_margin"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_today_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/def_text_color"
-            android:text="@string/today_date"
-            android:textSize="18sp"
             android:gravity="center_horizontal"
-            />
+            android:text="@string/today_date"
+            android:textColor="@color/def_text_color"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_time_passed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/def_margin"
-            android:textColor="@color/def_text_color"
             android:text="@string/def_timer_value"
-            android:textSize="60sp"
-            />
+            android:textColor="@color/def_text_color"
+            android:textSize="60sp" />
 
         <Space
-            android:layout_height="@dimen/def_margin"
             android:layout_width="0dp"
-            />
+            android:layout_height="@dimen/def_margin" />
 
-        <include layout="@layout/button_select_project"
-            android:id="@+id/b_select_project" />
+        <include
+            android:id="@+id/b_select_project"
+            layout="@layout/button_select_project" />
 
         <Space
-            android:layout_height="@dimen/def_margin"
             android:layout_width="0dp"
-            />
+            android:layout_height="@dimen/def_margin" />
 
-        <include layout="@layout/button_timer_play_pause"
-            android:id="@+id/b_timer_play_pause"/>
+        <include
+            android:id="@+id/b_timer_play_pause"
+            layout="@layout/button_timer_play_pause" />
 
         <Space
-            android:layout_height="@dimen/def_margin"
             android:layout_width="0dp"
-            />
+            android:layout_height="@dimen/def_margin" />
 
-        <include layout="@layout/button_timer_stop"
-            android:id="@+id/b_timer_stop"/>
+        <include
+            android:id="@+id/b_timer_stop"
+            layout="@layout/button_timer_stop" />
 
 
     </LinearLayout>
@@ -63,15 +61,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/hint_text_color"
-        android:text="@string/disclaimer"
-        android:textSize="12sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="@dimen/def_margin"
-        android:gravity="center_horizontal"
         android:layout_marginBottom="@dimen/def_margin"
-        />
+        android:gravity="center_horizontal"
+        android:text="@string/disclaimer"
+        android:textColor="@color/hint_text_color"
+        android:textSize="12sp" />
 
 
 </RelativeLayout>

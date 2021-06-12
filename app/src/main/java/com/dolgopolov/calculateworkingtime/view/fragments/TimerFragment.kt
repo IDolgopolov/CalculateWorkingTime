@@ -9,13 +9,10 @@ import androidx.fragment.app.viewModels
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentTimerBinding
 import com.dolgopolov.calculateworkingtime.di.moduls.TimerFragmentModule
-import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.states.TimerState
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view_models.TimerFragmentViewModel
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 
 class TimerFragment : BaseFragment<FragmentTimerBinding>() {
     private val viewModel: TimerFragmentViewModel by viewModels()

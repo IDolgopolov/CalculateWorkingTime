@@ -10,10 +10,10 @@ interface TimerFragmentComponent {
 
     @Subcomponent.Builder
     interface Builder {
-        fun requestModule(module: TimerFragmentModule) : Builder
-        fun build() : TimerFragmentComponent
+        fun requestModule(module: TimerFragmentModule): Builder
+        fun build(): TimerFragmentComponent
     }
 
     fun inject(fragment: TimerFragment)
-    fun buildViewModel() : TimerFragmentViewModelComponent.Builder
+    fun buildViewModel(): TimerFragmentViewModelComponent.Builder
 }

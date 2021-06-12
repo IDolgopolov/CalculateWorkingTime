@@ -8,11 +8,19 @@ import com.dolgopolov.calculateworkingtime.managers.ModelConverter
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
-import kotlinx.coroutines.*
-import javax.inject.Singleton
+import com.dolgopolov.calculateworkingtime.repositories.room_dao.WorkingTimeRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DatabaseImpl(context: Context) : AppDatabase {
-    private lateinit var workingTimeDB: WorkingTimeDatabase
+    private lateinit var workingTimeDB: WorkingTimeRepository
+
+    companion object {
+        const val DATABASE_NAME = "working_time"
+    }
+
 
     init {
         getDB(context)
@@ -21,55 +29,52 @@ class DatabaseImpl(context: Context) : AppDatabase {
     private fun getDB(context: Context) = GlobalScope.launch {
         workingTimeDB = Room.databaseBuilder(
             context,
-            WorkingTimeDatabase::class.java, "working_time"
-        ).build()
+            WorkingTimeDatabase::class.java,
+            DATABASE_NAME
+        ).build().workingTimeDao()
     }
 
     override suspend fun getDayInformationBy(formattedDate: String) =
         withContext(Dispatchers.IO) {
-            ModelConverter.parse(
-                workingTimeDB.workingTimeDao().getDayBy(formattedDate)
-            )
+            val dayDB = workingTimeDB.getDayBy(formattedDate)
+            ModelConverter.parse(dayDB)
         }
 
     override suspend fun addProject(project: Project) = withContext(Dispatchers.IO) {
-        workingTimeDB.workingTimeDao().add(
-            ModelConverter.parse(project)
-        )
+        val projectDB = ModelConverter.parse(project)
+        workingTimeDB.add(projectDB)
     }
 
     override suspend fun getAllProjects() = withContext(Dispatchers.IO) {
-        workingTimeDB.workingTimeDao().getAllProjects().map { ModelConverter.parse(it) }
+        workingTimeDB.getAllProjects().map { ModelConverter.parse(it) }
     }
 
     override suspend fun deleteProject(project: Project) = withContext(Dispatchers.IO) {
-        workingTimeDB.workingTimeDao().delete(
-            ModelConverter.parse(project)
-        )
+        val project1 = ModelConverter.parse(project)
+        workingTimeDB.delete(project1)
     }
 
     override suspend fun markAsDeleted(project: Project) = withContext(Dispatchers.IO) {
         project.isDeleted = true
-        workingTimeDB.workingTimeDao().update(
-            ModelConverter.parse(project)
-        )
+        workingTimeDB.update(ModelConverter.parse(project))
     }
 
-    override suspend fun addWorkingInfo(workingTimeInformation: WorkingTimeInformation) {
-        DateParser.splitWorkingTime(workingTimeInformation).forEach {
-            workingTimeDB.workingTimeDao().add(ModelConverter.parse(it))
+    override suspend fun addWorkingInfo(info: WorkingTimeInformation) =
+        withContext(Dispatchers.IO) {
+            DateParser.splitWorkingTime(info).forEach {
+                val dayInfo = ModelConverter.parse(it)
+                workingTimeDB.add(dayInfo)
+            }
         }
+
+    override suspend fun updateDayInfo(info: DayInformation) = withContext(Dispatchers.IO) {
+        val dayInfo = ModelConverter.parse(info)
+        workingTimeDB.update(dayInfo)
     }
 
-    override suspend fun updateDayInfo(dayInfo: DayInformation) {
-        workingTimeDB.workingTimeDao().update(
-            ModelConverter.parse(dayInfo)
-        )
-    }
-
-    override suspend fun updateWorkingInfo(workingInfo: WorkingTimeInformation, dayId: Int) {
-        workingTimeDB.workingTimeDao().update(
-            ModelConverter.parse(workingInfo, dayId)
-        )
-    }
+    override suspend fun updateWorkingInfo(info: WorkingTimeInformation, dayId: Int) =
+        withContext(Dispatchers.IO) {
+            val workingTime = ModelConverter.parse(info, dayId)
+            workingTimeDB.update(workingTime)
+        }
 }

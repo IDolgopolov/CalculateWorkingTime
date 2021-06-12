@@ -10,6 +10,6 @@ interface TimerFragmentViewModelComponent {
 
     @Subcomponent.Builder
     interface Builder {
-        fun build() : TimerFragmentViewModelComponent
+        fun build(): TimerFragmentViewModelComponent
     }
 }

@@ -14,11 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentOneDayBinding
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
-import com.dolgopolov.calculateworkingtime.view.adapters.RecyclerListProjectsAdapter
 import com.dolgopolov.calculateworkingtime.view.adapters.RecyclerProjectsInDayAdapter
-import com.dolgopolov.calculateworkingtime.view.holders.DayInfoHolder
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
+import com.dolgopolov.calculateworkingtime.view.holders.DayInfoHolder
 import com.dolgopolov.calculateworkingtime.view_models.OneDayFragmentViewModel
 
 
@@ -99,7 +98,6 @@ class OneDayFragment : BaseFragment<FragmentOneDayBinding>() {
             .inflate(R.layout.dialog_input_new_working_time, null, false)
 
         AlertDialog.Builder(context)
-            .setTitle("Новое время:")
             .setView(dialogView)
             .setNegativeButton(R.string.cancel, null)
             .setPositiveButton(R.string.ok) { _, _ ->

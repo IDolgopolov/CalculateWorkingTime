@@ -8,7 +8,7 @@ import dagger.Subcomponent
 interface SettingFragmentViewModelComponent {
     @Subcomponent.Builder
     interface Builder {
-        fun build() : SettingFragmentViewModelComponent
+        fun build(): SettingFragmentViewModelComponent
     }
 
     fun inject(viewModel: SettingFragmentViewModel)

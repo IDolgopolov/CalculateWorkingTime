@@ -52,12 +52,7 @@ class CalendarView @Inject constructor(private val context: Context) {
                 val dayViewHolder = DayInfoHolder()
 
                 days.forEach { dayInfo ->
-                    val dayView = LayoutInflater.from(context)
-                        .inflate(
-                            R.layout.item_calendar,
-                            containerDays,
-                            false
-                        )
+                    val dayView = createDayView()
 
                     dayViewHolder.bind(
                         dayView,
@@ -73,6 +68,13 @@ class CalendarView @Inject constructor(private val context: Context) {
 
             views.forEach { containerDays?.addView(it) }
         }
+
+    private fun createDayView() = LayoutInflater.from(context)
+        .inflate(
+            R.layout.item_calendar,
+            containerDays,
+            false
+        )
 
     fun onDestroyView() {
         view = null

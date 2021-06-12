@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
@@ -53,7 +52,9 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
 
     fun playPauseTimer() = viewModelScope.launch {
         if (selectedProject.value == null) {
-            error.postValue("Необходимо выбрать проект")
+            val errorMessage =
+                getApplication<Application>().getString(R.string.error_select_project)
+            error.value = errorMessage
             return@launch
         }
 
@@ -92,7 +93,7 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
         workManager
             .getWorkInfosForUniqueWorkLiveData(TimerWorker.UNIQUE_NAME)
             .observe(fragment) { listInfo ->
-                for(info in listInfo) {
+                for (info in listInfo) {
                     val secondsPassed = info.progress.getLong(TimerWorker.SECONDS_PASSED, -1L)
                     if (secondsPassed == -1L) continue
 

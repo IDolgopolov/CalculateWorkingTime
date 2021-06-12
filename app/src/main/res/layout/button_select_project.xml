@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:app="http://schemas.android.com/apk/res-auto"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/ItemListProject"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="start|center_vertical"
     android:text="@string/project"
     app:drawableEndCompat="@drawable/ic_arrow_next" />

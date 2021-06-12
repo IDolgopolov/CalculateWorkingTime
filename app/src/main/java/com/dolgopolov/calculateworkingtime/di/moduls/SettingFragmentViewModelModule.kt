@@ -5,7 +5,4 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class SettingFragmentViewModelModule {
-    @Provides
-    fun getSettingRepository() = SettingRepository()
-}
+class SettingFragmentViewModelModule

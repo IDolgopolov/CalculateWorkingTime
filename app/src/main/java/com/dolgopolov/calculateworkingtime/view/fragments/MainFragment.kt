@@ -8,14 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentMainBinding
-import com.dolgopolov.calculateworkingtime.di.components.AppComponent
-import com.dolgopolov.calculateworkingtime.di.moduls.MainFragmentModule
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view.custom_view.CalendarView
 import com.dolgopolov.calculateworkingtime.view_models.MainFragmentViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 

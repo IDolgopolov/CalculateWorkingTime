@@ -1,4 +1,4 @@
-package com.dolgopolov.calculateworkingtime.view.holders
+package com.dolgopolov.calculateworkingtime.view.holders.list_projects
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

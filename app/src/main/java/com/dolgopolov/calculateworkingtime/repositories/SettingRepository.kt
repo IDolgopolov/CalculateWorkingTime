@@ -1,11 +1,11 @@
 package com.dolgopolov.calculateworkingtime.repositories
 
-import android.app.Activity
 import android.content.Context
 import androidx.core.content.edit
-import java.lang.IllegalStateException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SettingRepository @Inject constructor() {
     companion object {
         private const val SETTINGS_FILE = "settings"
@@ -14,16 +14,15 @@ class SettingRepository @Inject constructor() {
     }
 
     fun save(key: String, value: Any, context: Context) =
-        context.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE).edit {
+        getSharedPref(context).edit {
             putString(key, value.toString())
         }
 
-    @Suppress("UNCHECKED_CAST")
     fun get(key: String, context: Context) =
-        context
-            .getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE)
-            .getString(key, null)
-            ?: getDefValue(key)
+        getSharedPref(context).getString(key, null) ?: getDefValue(key)
+
+    private fun getSharedPref(context: Context) =
+        context.getSharedPreferences(SETTINGS_FILE, Context.MODE_PRIVATE)
 
 
     private fun getDefValue(key: String): String {

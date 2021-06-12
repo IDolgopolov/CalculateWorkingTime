@@ -34,8 +34,7 @@
         tools:layout="@layout/fragment_one_day">
         <argument
             android:name="dayInfo"
-            app:argType="com.dolgopolov.calculateworkingtime.models.DayInformation"
-            />
+            app:argType="com.dolgopolov.calculateworkingtime.models.DayInformation" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"

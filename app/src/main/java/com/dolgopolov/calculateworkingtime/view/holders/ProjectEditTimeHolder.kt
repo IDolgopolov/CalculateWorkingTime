@@ -9,12 +9,12 @@ import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 
 class ProjectEditTimeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(workingTimeInformation: WorkingTimeInformation, onRequestEditTime: () -> Unit) {
-        itemView.findViewById<TextView>(R.id.tv_name).text =
-            workingTimeInformation.project.name
-
+        val tvName = itemView.findViewById<TextView>(R.id.tv_name)
         val tvWorkingTime = itemView.findViewById<TextView>(R.id.tv_time)
-        tvWorkingTime.text =
-            DateParser.getWorkingTimeFormatted(workingTimeInformation.seconds)
+
+        tvName.text = workingTimeInformation.project.name
+
+        tvWorkingTime.text = DateParser.getWorkingTimeFormatted(workingTimeInformation.seconds)
         tvWorkingTime.setOnClickListener {
             onRequestEditTime()
         }

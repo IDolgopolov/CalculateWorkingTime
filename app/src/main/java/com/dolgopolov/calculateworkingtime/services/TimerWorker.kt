@@ -1,7 +1,9 @@
 package com.dolgopolov.calculateworkingtime.services
 
 import android.content.Context
-import androidx.work.*
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.dolgopolov.calculateworkingtime.models.Project
 import com.dolgopolov.calculateworkingtime.states.TimerState
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -18,6 +20,8 @@ class TimerWorker(
         const val SECONDS_PASSED = "TIME_PASSED"
         const val UNIQUE_NAME = "TIMER_WORKER"
         var state = TimerState.Stopped
+
+        private const val INTERVAL = 1000L
     }
 
     private lateinit var project: Project
@@ -29,7 +33,7 @@ class TimerWorker(
         showForegroundNotification()
         state = TimerState.Playing
 
-        val ticker = ticker(1000L, 0L)
+        val ticker = ticker(INTERVAL, 0L)
         var secondPassed = 0L
         for (tick in ticker) {
             if (state == TimerState.Stopped) {

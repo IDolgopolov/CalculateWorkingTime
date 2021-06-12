@@ -4,16 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dolgopolov.calculateworkingtime.R
-import com.dolgopolov.calculateworkingtime.interfaces.ProjectAddingListener
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectListener
 import com.dolgopolov.calculateworkingtime.models.Project
-import com.dolgopolov.calculateworkingtime.view.holders.InputProjectHolder
-import com.dolgopolov.calculateworkingtime.view.holders.ItemListProjectsHolder
-import com.dolgopolov.calculateworkingtime.view.holders.ProjectHolder
-import java.lang.IllegalStateException
+import com.dolgopolov.calculateworkingtime.view.holders.list_projects.InputProjectHolder
+import com.dolgopolov.calculateworkingtime.view.holders.list_projects.ItemListProjectsHolder
+import com.dolgopolov.calculateworkingtime.view.holders.list_projects.ProjectHolder
 
 class RecyclerListProjectsAdapter(
-    private val projectAddingListener: ProjectAddingListener,
     private val projectListener: ProjectListener
 ) : RecyclerView.Adapter<ItemListProjectsHolder>() {
 
@@ -26,7 +23,7 @@ class RecyclerListProjectsAdapter(
                 (holder as ProjectHolder).bind(item, projectListener)
             }
             HOLDER_TYPE_INPUT_PROJECT -> {
-                (holder as InputProjectHolder).bind(projectAddingListener)
+                (holder as InputProjectHolder).bind(projectListener)
             }
         }
     }
@@ -57,9 +54,9 @@ class RecyclerListProjectsAdapter(
     override fun getItemCount() = items.size + INPUT_ITEMS_COUNT
 
     private companion object {
-        const val HOLDER_TYPE_PROJECT = 1
-        const val HOLDER_TYPE_INPUT_PROJECT = 2
-        const val INPUT_ITEMS_COUNT = 1
+        private const val HOLDER_TYPE_PROJECT = 1
+        private const val HOLDER_TYPE_INPUT_PROJECT = 2
+        private const val INPUT_ITEMS_COUNT = 1
     }
 
     fun add(project: Project) {

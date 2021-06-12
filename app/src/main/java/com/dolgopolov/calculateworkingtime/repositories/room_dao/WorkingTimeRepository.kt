@@ -1,12 +1,10 @@
 package com.dolgopolov.calculateworkingtime.repositories.room_dao
 
 import androidx.room.*
-import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.DayEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.ProjectEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_entities.WorkingTimeEntity
 import com.dolgopolov.calculateworkingtime.models.db_models.room_relations.DayWithWorkingTime
-import com.dolgopolov.calculateworkingtime.models.db_models.room_relations.WorkingTimeWithProject
 
 @Dao
 interface WorkingTimeRepository {
@@ -18,13 +16,16 @@ interface WorkingTimeRepository {
     @Query("SELECT * FROM days WHERE formattedDate = :date")
     suspend fun getDayBy(date: String) : DayWithWorkingTime?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM projects")
+    suspend fun getAllProjects() : List<ProjectEntity>
+
+    @Insert
     suspend fun add(project: ProjectEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun add(day: DayEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     suspend fun add(workingTime: WorkingTimeEntity)
 
     @Update
@@ -35,6 +36,9 @@ interface WorkingTimeRepository {
 
     @Update
     suspend fun update(project: ProjectEntity)
+
+    @Delete
+    suspend fun delete(project: ProjectEntity)
 
     suspend fun update(dayInfo: DayWithWorkingTime) {
         update(dayInfo.dayEntity)
@@ -49,10 +53,4 @@ interface WorkingTimeRepository {
             add(it.workingTimeEntity)
         }
     }
-
-    @Query("SELECT * FROM projects")
-    suspend fun getAllProjects() : List<ProjectEntity>
-
-    @Delete
-    suspend fun delete(project: ProjectEntity)
 }

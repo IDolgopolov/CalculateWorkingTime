@@ -56,7 +56,6 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     }
 
     private val clipPath = Path()
-    private val pathProgress = Path()
 
 
     fun setProgress(progress: Float) {
@@ -72,7 +71,7 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     private fun calculateProgressView() {
         progressHeight = when {
             (progress == 0f) -> 0f
-            (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS/100)
+            (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS / 100)
             (progress > maxProgress) -> height * 1f
             else -> height * (progress / maxProgress)
         }
@@ -100,16 +99,14 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
         )
         canvas?.clipPath(clipPath)
 
-        pathProgress.addRoundRect(
+        canvas?.drawRoundRect(
             0f,
             height - progressHeight,
             width.toFloat(),
             height.toFloat(),
             cornersRadius,
-            cornersRadius,
-            Path.Direction.CW
+            cornersRadius, progressPaint
         )
-        canvas?.drawPath(pathProgress, progressPaint)
 
         canvas?.drawRect(
             0f,

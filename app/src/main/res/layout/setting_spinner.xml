@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ItemListProject"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingVertical="@dimen/def_margin"
-    >
+    android:paddingVertical="@dimen/def_margin">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/def_text_color"
-        android:textSize="@dimen/item_project_text_size"
         android:layout_centerVertical="true"
         android:text="@string/count_work_house_in_day"
-        />
+        android:textColor="@color/def_text_color"
+        android:textSize="@dimen/item_project_text_size" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_check"
+        android:layout_centerVertical="true"
         android:backgroundTint="@color/buttons_background_color"
         android:dropDownWidth="40dp"
-        />
+        android:src="@drawable/ic_check" />
 </RelativeLayout>

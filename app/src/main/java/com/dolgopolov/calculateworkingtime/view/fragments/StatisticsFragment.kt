@@ -15,16 +15,8 @@ class StatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
-    }
-
-    companion object {
-
-        fun newInstance(param1: String, param2: String) =
-            StatisticsFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+        val view = inflater.inflate(R.layout.fragment_statistics, container, false)
+        _binder = FragmentStatisticsBinding.bind(view)
+        return view
     }
 }

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.databinding.FragmentProjectsBinding
 import com.dolgopolov.calculateworkingtime.di.moduls.ProjectFragmentModule
-import com.dolgopolov.calculateworkingtime.interfaces.ProjectAddingListener
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectListener
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectTransactionResultListener
 import com.dolgopolov.calculateworkingtime.models.Project
@@ -21,7 +20,6 @@ import com.dolgopolov.calculateworkingtime.view.adapters.RecyclerListProjectsAda
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view_models.ProjectsFragmentViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -64,12 +62,8 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
         observe()
     }
 
-    private val projectAddingListener = object : ProjectAddingListener {
-        override fun onAdded(name: String) {
-            viewModel.add(name)
-        }
-    }
-    private val projectListener = object : ProjectListener {
+
+    private val projectsListener = object : ProjectListener {
         override fun onSelect(project: Project) {
             viewModel.selected(project)
         }
@@ -81,10 +75,14 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
                     viewModel.delete(project)
                 })
         }
+
+        override fun onNewProjectEntered(name: String) {
+            viewModel.add(name)
+        }
     }
 
     private fun createRecyclerAdapter() {
-        adapter = RecyclerListProjectsAdapter(projectAddingListener, projectListener)
+        adapter = RecyclerListProjectsAdapter(projectsListener)
 
         context?.let {
             val divider = DividerItemDecoration(it, RecyclerView.VERTICAL)
@@ -102,7 +100,10 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
-            showMessage(error)
+            error?.let {
+                showMessage(error)
+                viewModel.error.value = null
+            }
         }
     }
 

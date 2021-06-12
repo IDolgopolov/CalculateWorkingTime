@@ -9,7 +9,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SettingFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    @Inject lateinit var settingRepo: SettingRepository
+    @Inject
+    lateinit var settingRepo: SettingRepository
 
     init {
         App.getInstance()
@@ -23,7 +24,7 @@ class SettingFragmentViewModel(application: Application) : AndroidViewModel(appl
         settingRepo.save(key, value, getApplication())
     }
 
-    fun getSetting(key: String) : Int {
+    fun getSetting(key: String): Int {
         return settingRepo.get(key, getApplication()).toInt()
     }
 }

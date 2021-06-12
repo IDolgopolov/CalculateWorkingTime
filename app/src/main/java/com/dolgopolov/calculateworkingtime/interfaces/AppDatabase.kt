@@ -9,8 +9,8 @@ interface AppDatabase {
     suspend fun addProject(project: Project)
     suspend fun getAllProjects() : List<Project>
     suspend fun deleteProject(project: Project)
-    suspend fun addWorkingInfo(workingTimeInformation: WorkingTimeInformation)
-    suspend fun updateDayInfo(dayInfo: DayInformation)
-    suspend fun updateWorkingInfo(workingInfo: WorkingTimeInformation, dayId: Int)
+    suspend fun addWorkingInfo(info: WorkingTimeInformation)
+    suspend fun updateDayInfo(info: DayInformation)
+    suspend fun updateWorkingInfo(info: WorkingTimeInformation, dayId: Int)
     suspend fun markAsDeleted(project: Project)
 }

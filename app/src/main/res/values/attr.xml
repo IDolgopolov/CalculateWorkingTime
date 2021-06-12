@@ -2,6 +2,6 @@
 <resources>
     <declare-styleable name="VerticalProgressBar">
         <attr name="progress" format="float" />
-        <attr name="maxProgress" format="float"/>
+        <attr name="maxProgress" format="float" />
     </declare-styleable>
 </resources>

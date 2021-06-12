@@ -1,17 +1,16 @@
 package com.dolgopolov.calculateworkingtime.di.components
 
 import com.dolgopolov.calculateworkingtime.view.fragments.SettingFragment
-import dagger.Component
 import dagger.Subcomponent
 
 @Subcomponent
 interface SettingFragmentComponent {
     @Subcomponent.Builder
     interface Builder {
-        fun build() : SettingFragmentComponent
+        fun build(): SettingFragmentComponent
     }
 
     fun inject(fragment: SettingFragment)
-    fun buildViewModel() : SettingFragmentViewModelComponent.Builder
+    fun buildViewModel(): SettingFragmentViewModelComponent.Builder
 
 }

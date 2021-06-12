@@ -45,7 +45,7 @@ class SaveProgressWorker(
 
     private suspend fun save() {
         try {
-            val workingInfo = WorkingTimeInformation(Random.nextInt(), project, secondPass)
+            val workingInfo = WorkingTimeInformation(project, secondPass)
             database.addWorkingInfo(workingInfo)
         } catch (e: Exception) {
             e.printStackTrace()

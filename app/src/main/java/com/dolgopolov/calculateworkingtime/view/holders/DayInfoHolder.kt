@@ -14,11 +14,11 @@ class DayInfoHolder {
         workingHoursInDay: Int,
         onClick: (() -> Unit)? = null
     ): View {
-        dayView.findViewById<TextView>(R.id.tv_date).text =
-            DateParser.getDateNumberFromFormattedDate(dayInfo.formattedDate)
-
+        val tvDate = dayView.findViewById<TextView>(R.id.tv_date)
         val tvWorkingTime = dayView.findViewById<TextView>(R.id.tv_time)
         val progressBar = dayView.findViewById<VerticalProgressBar>(R.id.progress_view)
+
+        tvDate.text = DateParser.getDateNumberFrom(dayInfo.formattedDate)
 
         when {
             dayInfo.listWorkingTime.isEmpty() -> tvWorkingTime.visibility = View.GONE
@@ -26,9 +26,11 @@ class DayInfoHolder {
                 tvWorkingTime.text =
                     DateParser.getWorkingTimeFormatted(dayInfo.listWorkingTime)
 
-                progressBar.setProgress(
-                    DateParser.calculateProgress(dayInfo.listWorkingTime, workingHoursInDay)
+                val progress = DateParser.calculateProgressInPercent(
+                    dayInfo.listWorkingTime,
+                    workingHoursInDay
                 )
+                progressBar.setProgress(progress)
             }
         }
 

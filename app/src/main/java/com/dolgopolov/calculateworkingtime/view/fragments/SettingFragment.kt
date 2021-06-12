@@ -13,7 +13,6 @@ import com.dolgopolov.calculateworkingtime.repositories.SettingRepository
 import com.dolgopolov.calculateworkingtime.view.base.App
 import com.dolgopolov.calculateworkingtime.view.base.BaseFragment
 import com.dolgopolov.calculateworkingtime.view_models.SettingFragmentViewModel
-import javax.inject.Inject
 
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
