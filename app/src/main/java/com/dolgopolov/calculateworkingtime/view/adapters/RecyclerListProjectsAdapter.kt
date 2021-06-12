@@ -7,6 +7,9 @@ import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectAddingListener
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectListener
 import com.dolgopolov.calculateworkingtime.models.Project
+import com.dolgopolov.calculateworkingtime.view.holders.InputProjectHolder
+import com.dolgopolov.calculateworkingtime.view.holders.ItemListProjectsHolder
+import com.dolgopolov.calculateworkingtime.view.holders.ProjectHolder
 import java.lang.IllegalStateException
 
 class RecyclerListProjectsAdapter(

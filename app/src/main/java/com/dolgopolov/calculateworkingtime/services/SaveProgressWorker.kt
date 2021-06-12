@@ -10,6 +10,7 @@ import com.dolgopolov.calculateworkingtime.repositories.DatabaseImpl
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import kotlin.random.Random
 
 class SaveProgressWorker(
     context: Context,
@@ -44,7 +45,7 @@ class SaveProgressWorker(
 
     private suspend fun save() {
         try {
-            val workingInfo = WorkingTimeInformation(project, secondPass)
+            val workingInfo = WorkingTimeInformation(Random.nextInt(), project, secondPass)
             database.addWorkingInfo(workingInfo)
         } catch (e: Exception) {
             e.printStackTrace()

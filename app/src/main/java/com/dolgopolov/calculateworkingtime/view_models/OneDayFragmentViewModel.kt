@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
 import com.dolgopolov.calculateworkingtime.models.DayInformation
+import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 import com.dolgopolov.calculateworkingtime.repositories.SettingRepository
 import com.dolgopolov.calculateworkingtime.view.base.App
 import kotlinx.coroutines.launch
@@ -32,6 +33,12 @@ class OneDayFragmentViewModel(application: Application) : AndroidViewModel(appli
     fun update(info: DayInformation) = viewModelScope.launch {
         database.updateDayInfo(info)
         dayInformation.value = info
+    }
+
+    fun update(info: WorkingTimeInformation, dayId: Int, newTime: Long) = viewModelScope.launch {
+        info.seconds = newTime
+        database.updateWorkingInfo(info, dayId)
+
     }
 
     fun updateDayOffStatus(info: DayInformation, isDayOff: Boolean) {

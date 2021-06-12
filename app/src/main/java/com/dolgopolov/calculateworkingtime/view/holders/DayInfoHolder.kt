@@ -1,4 +1,4 @@
-package com.dolgopolov.calculateworkingtime.view.adapters
+package com.dolgopolov.calculateworkingtime.view.holders
 
 import android.view.View
 import android.widget.TextView

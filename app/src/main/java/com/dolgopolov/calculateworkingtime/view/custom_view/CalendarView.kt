@@ -1,17 +1,14 @@
 package com.dolgopolov.calculateworkingtime.view.custom_view
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.models.DayInformation
-import com.dolgopolov.calculateworkingtime.view.adapters.DayInfoHolder
+import com.dolgopolov.calculateworkingtime.view.holders.DayInfoHolder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

@@ -3,14 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragments.OneDayFragment"
     android:paddingHorizontal="@dimen/def_margin">
 
     <include layout="@layout/item_calendar_for_one_day"
         android:id="@+id/day_info"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/def_margin"
         android:layout_width="@dimen/item_calendar_one_day_size"
         android:layout_height="@dimen/item_calendar_one_day_size"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_project_in_day"
+        android:layout_width="@dimen/item_calendar_one_day_size"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        tools:listitem="@layout/item_project_edit_time"
+        android:layout_below="@id/day_info"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
+        android:paddingTop="@dimen/def_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
 

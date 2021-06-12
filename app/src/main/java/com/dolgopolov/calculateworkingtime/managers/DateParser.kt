@@ -76,7 +76,7 @@ object DateParser {
                 now.get(Calendar.MINUTE) * SECONDS_IN_MINUTE +
                 now.get(Calendar.HOUR) * SECONDS_IN_HOUR)
         val workingTimeInfoToday =
-            WorkingTimeInformation(info.project, secondsPassToday)
+            WorkingTimeInformation(Random().nextInt(), info.project, secondsPassToday)
         listDays.add(DayInformation(getTodayFormattedDate(), listOf(workingTimeInfoToday)))
 
         //HOW MANY FULL DAYS PASSED
@@ -85,7 +85,7 @@ object DateParser {
         if (countFullDays > 0) {
             for (i in 0 until countFullDays) {
                 val prevDayWorkingTime =
-                    WorkingTimeInformation(workingTimeInfoToday.project, SECONDS_IN_DAY)
+                    WorkingTimeInformation(Random().nextInt(), workingTimeInfoToday.project, SECONDS_IN_DAY)
                 now.add(Calendar.DAY_OF_MONTH, -1)
 
                 val prevDayInfo = DayInformation(getFormattedDate(now), listOf(prevDayWorkingTime))
@@ -95,6 +95,7 @@ object DateParser {
 
         //DAY, WHEN USER STARTED WORK
         val lastPrevDayWorkingInfo = WorkingTimeInformation(
+            Random().nextInt(),
             workingTimeInfoToday.project,
             workingTimeInfoToday.seconds - secondsPassToday - countFullDays * SECONDS_IN_DAY
         )

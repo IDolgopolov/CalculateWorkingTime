@@ -17,6 +17,7 @@ object ModelConverter {
             dayDB.dayEntity.formattedDate,
             dayDB.listWorkingTimesWithProject.map {
                 WorkingTimeInformation(
+                    it.workingTimeEntity.id,
                     parse(it.project),
                     it.workingTimeEntity.workingTime
                 )
@@ -29,7 +30,7 @@ object ModelConverter {
         dayId: Int,
     ): WorkingTimeEntity {
         return WorkingTimeEntity(
-            -1,
+            workingInfo.id,
             dayId,
             workingInfo.project.id,
             workingInfo.seconds

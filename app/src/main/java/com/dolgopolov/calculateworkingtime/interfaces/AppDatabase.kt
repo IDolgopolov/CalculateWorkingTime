@@ -11,5 +11,6 @@ interface AppDatabase {
     suspend fun deleteProject(project: Project)
     suspend fun addWorkingInfo(workingTimeInformation: WorkingTimeInformation)
     suspend fun updateDayInfo(dayInfo: DayInformation)
+    suspend fun updateWorkingInfo(workingInfo: WorkingTimeInformation, dayId: Int)
     suspend fun markAsDeleted(project: Project)
 }

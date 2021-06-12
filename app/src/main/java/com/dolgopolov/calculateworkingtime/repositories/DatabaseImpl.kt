@@ -66,4 +66,10 @@ class DatabaseImpl(context: Context) : AppDatabase {
             ModelConverter.parse(dayInfo)
         )
     }
+
+    override suspend fun updateWorkingInfo(workingInfo: WorkingTimeInformation, dayId: Int) {
+        workingTimeDB.workingTimeDao().update(
+            ModelConverter.parse(workingInfo, dayId)
+        )
+    }
 }

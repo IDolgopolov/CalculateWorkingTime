@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WorkingTimeInformation(
+    val id: Int,
     val project: Project,
-    val seconds: Long
+    var seconds: Long
 )

@@ -1,10 +1,11 @@
-package com.dolgopolov.calculateworkingtime.view.adapters
+package com.dolgopolov.calculateworkingtime.view.holders
 
 import android.view.View
 import android.widget.TextView
 import com.dolgopolov.calculateworkingtime.R
 import com.dolgopolov.calculateworkingtime.interfaces.ProjectListener
 import com.dolgopolov.calculateworkingtime.models.Project
+import com.dolgopolov.calculateworkingtime.view.holders.ItemListProjectsHolder
 
 class ProjectHolder(itemView: View) : ItemListProjectsHolder(itemView) {
     fun bind(project: Project, projectListener: ProjectListener) {

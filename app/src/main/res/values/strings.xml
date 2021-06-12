@@ -17,7 +17,7 @@
     <string name="space">\ </string>
     <string name="line_break">\n</string>
     <string name="count_work_house_in_day">Количество рабочих часов\nв сутки</string>
-    <string name="it_day_off">Это выходной</string>
+    <string name="it_day_off">это выходной</string>
     <string name="label_one_day">один день</string>
     <string name="label_settings">настройки</string>
     <string name="label_timer">таймер</string>
@@ -26,4 +26,6 @@
     <string name="cancel">отмена</string>
     <string name="ok">подтвердить</string>
     <string name="delete_project_or_not">Удалить проект? Статистика с ним сохранится, но выбрать его больше будет нелья</string>
+    <string name="hint_input_time">50</string>
+    <string name="input_new_time">Введите новое время, мин:</string>
 </resources>
