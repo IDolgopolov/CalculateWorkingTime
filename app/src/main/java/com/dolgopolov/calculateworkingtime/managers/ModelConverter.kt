@@ -21,7 +21,8 @@ object ModelConverter {
                     it.workingTimeEntity.workingTime,
                     it.workingTimeEntity.id
                 )
-            }
+            },
+            dayDB.dayEntity.id
         )
     }
 

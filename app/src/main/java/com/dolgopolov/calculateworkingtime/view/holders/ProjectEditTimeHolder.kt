@@ -14,9 +14,10 @@ class ProjectEditTimeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
 
         tvName.text = workingTimeInformation.project.name
 
-        tvWorkingTime.text = DateParser.getWorkingTimeFormatted(workingTimeInformation.seconds)
-        tvWorkingTime.setOnClickListener {
+        tvWorkingTime.text = DateParser.getWorkingTimeFormatted(workingTimeInformation.seconds, true)
+        itemView.setOnLongClickListener {
             onRequestEditTime()
+            return@setOnLongClickListener true
         }
     }
 }

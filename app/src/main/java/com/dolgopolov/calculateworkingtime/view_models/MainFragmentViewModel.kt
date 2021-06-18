@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
 import com.dolgopolov.calculateworkingtime.managers.DateParser
+import com.dolgopolov.calculateworkingtime.managers.IdGenerator
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.repositories.SettingRepository
 import com.dolgopolov.calculateworkingtime.view.base.App
@@ -34,8 +35,10 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     @Inject
     lateinit var calendarInstance: Calendar
+
     @Inject
     lateinit var database: AppDatabase
+
     @Inject
     lateinit var settingDatabase: SettingRepository
 
@@ -54,7 +57,8 @@ class MainFragmentViewModel(application: Application) : AndroidViewModel(applica
             var dayInformation = database.getDayInformationBy(formattedDate)
 
             if (dayInformation == null)
-                dayInformation = DayInformation(formattedDate)
+                dayInformation =
+                    DayInformation(formattedDate, emptyList(), IdGenerator().getIdByDate())
 
             days.add(dayInformation)
         }

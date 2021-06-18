@@ -90,24 +90,36 @@ class OneDayFragment : BaseFragment<FragmentOneDayBinding>() {
 
             recyclerProjectsInDayAdapter.add(it.listWorkingTime)
         }
+
+        observeToError(viewModel.error)
     }
 
     private fun showDialogEditTime(workingTimeInformation: WorkingTimeInformation, dayId: Int) {
         val context = context ?: return
         val dialogView = LayoutInflater.from(context)
             .inflate(R.layout.dialog_input_new_working_time, null, false)
+        val etNewTime = dialogView.findViewById<EditText>(R.id.et_new_time)
+        val bAccept = dialogView.findViewById<View>(R.id.b_accept)
+        val bCancel = dialogView.findViewById<View>(R.id.b_cancel)
 
-        AlertDialog.Builder(context)
+        val dialog = AlertDialog.Builder(context, R.style.CustomDialog)
             .setView(dialogView)
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.ok) { _, _ ->
-                val etNewTime = dialogView.findViewById<EditText>(R.id.et_new_time)
-                val newTime = etNewTime.text.toString().toLongOrNull()
-                if (newTime != null)
-                    viewModel.update(workingTimeInformation, dayId, newTime)
-            }
             .create()
-            .show()
 
+        bAccept.setOnClickListener {
+            val newTime = etNewTime.text.toString().toLongOrNull()
+            if (newTime != null)
+                viewModel.update(workingTimeInformation, dayId, newTime)
+            else
+                showMessage(R.string.error_wrong_new_time)
+
+            dialog.dismiss()
+        }
+
+        bCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

@@ -27,4 +27,6 @@
     <string name="hint_input_time">50</string>
     <string name="input_new_time">Введите новое время, мин:</string>
     <string name="error_select_project">Необходимо выбрать проект</string>
+    <string name="error_wrong_new_time">Данное число не может быть временем</string>
+    <string name="accept">принять</string>
 </resources>

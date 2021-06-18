@@ -99,12 +99,7 @@ class ProjectsFragment : BaseFragment<FragmentProjectsBinding>(), ProjectTransac
             adapter.add(it)
         }
 
-        viewModel.error.observe(viewLifecycleOwner) { error ->
-            error?.let {
-                showMessage(error)
-                viewModel.error.value = null
-            }
-        }
+        observeToError(viewModel.error)
     }
 
     override fun onAdded(project: Project) {

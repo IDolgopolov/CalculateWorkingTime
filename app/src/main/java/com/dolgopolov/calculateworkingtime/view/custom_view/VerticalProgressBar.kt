@@ -19,7 +19,7 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     companion object {
         private const val DEF_PROGRESS_VALUE = 0f
         private const val DEF_MAX_PROGRESS = 100f
-        private const val MIN_PROGRESS = 20f
+        private const val MIN_PROGRESS = 10f
     }
 
     init {
@@ -48,8 +48,9 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
 
     private val progressPaint = Paint().apply {
         style = Paint.Style.FILL
-        color = ContextCompat.getColor(context, R.color.progress_color)
+        color = ContextCompat.getColor(context, R.color.progress_color_def)
     }
+
     private val backgroundPaint = Paint().apply {
         style = Paint.Style.FILL
         color = ContextCompat.getColor(context, R.color.background_progress_color)
@@ -69,13 +70,25 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
     }
 
     private fun calculateProgressView() {
-        progressHeight = when {
-            (progress == 0f) -> 0f
-            (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS / 100)
-            (progress > maxProgress) -> height * 1f
-            else -> height * (progress / maxProgress)
-        }
+        progressHeight = getProgressHeight()
+        progressPaint.color = getProgressColor()
         invalidate()
+    }
+
+    private fun getProgressColor() = ContextCompat.getColor(
+        context, when {
+            (progress == 0f) -> R.color.progress_color_very_small
+            (progress < MIN_PROGRESS) -> R.color.progress_color_small
+            (progress > maxProgress) -> R.color.progress_color_more_than_max
+            else -> R.color.progress_color_def
+        }
+    )
+
+    private fun getProgressHeight() = when {
+        (progress == 0f) -> 0f
+        (progress < MIN_PROGRESS) -> height * (MIN_PROGRESS / 100)
+        (progress > maxProgress) -> height * 1f
+        else -> height * (progress / maxProgress)
     }
 
 
@@ -105,7 +118,8 @@ class VerticalProgressBar(context: Context, attrs: AttributeSet) : View(context,
             width.toFloat(),
             height.toFloat(),
             cornersRadius,
-            cornersRadius, progressPaint
+            cornersRadius,
+            progressPaint
         )
 
         canvas?.drawRect(

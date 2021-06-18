@@ -22,7 +22,7 @@ interface WorkingTimeRepository {
     @Insert
     suspend fun add(project: ProjectEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun add(day: DayEntity)
 
     @Insert

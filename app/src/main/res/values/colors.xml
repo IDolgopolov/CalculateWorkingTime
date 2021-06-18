@@ -6,7 +6,6 @@
     <color name="icon_color">#E6E6E6</color>
     <color name="background_color">#121212</color>
 
-    <color name="progress_color">#8BC34A</color>
     <color name="background_progress_color">#4D000000</color>
 
     <color name="buttons_background_color">#1AFFFFFF</color>
@@ -16,4 +15,13 @@
     <color name="day_gradient_end_color">#3C0E4D</color>
 
     <color name="drop_down_spinner_item_color">#6C6C6C</color>
+
+    <color name="deleted_project_background_color">#61F44336</color>
+
+    <color name="progress_color_more_than_max">#A000BC</color>
+    <color name="progress_color_def">#8BC34A</color>
+    <color name="progress_color_small">#FFEB3B</color>
+    <color name="progress_color_very_small">#F44336</color>
+
+
 </resources>

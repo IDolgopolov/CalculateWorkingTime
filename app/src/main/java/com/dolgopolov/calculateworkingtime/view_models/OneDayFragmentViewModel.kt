@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dolgopolov.calculateworkingtime.interfaces.AppDatabase
+import com.dolgopolov.calculateworkingtime.managers.DateParser
 import com.dolgopolov.calculateworkingtime.models.DayInformation
 import com.dolgopolov.calculateworkingtime.models.WorkingTimeInformation
 import com.dolgopolov.calculateworkingtime.repositories.SettingRepository
@@ -13,6 +14,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OneDayFragmentViewModel(application: Application) : AndroidViewModel(application) {
+    val error = MutableLiveData<String?>()
+
     init {
         App.getInstance()
             .oneDayFragmentComponent
@@ -34,11 +37,15 @@ class OneDayFragmentViewModel(application: Application) : AndroidViewModel(appli
         dayInformation.value = info
     }
 
-    fun update(info: WorkingTimeInformation, dayId: Int, newTime: Long) = viewModelScope.launch {
-        info.seconds = newTime
-        database.updateWorkingInfo(info, dayId)
+    fun update(info: WorkingTimeInformation, dayId: Int, newTimeMin: Long?) =
+        viewModelScope.launch {
+            if (newTimeMin == null) {
+                return@launch
+            }
 
-    }
+            info.seconds = DateParser.convertMinutesToSeconds(newTimeMin)
+            database.updateWorkingInfo(info, dayId)
+        }
 
     fun updateDayOffStatus(info: DayInformation, isDayOff: Boolean) {
         if (info.isDayOff != isDayOff) {

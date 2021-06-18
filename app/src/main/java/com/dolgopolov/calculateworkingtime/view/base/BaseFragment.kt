@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
@@ -48,6 +50,19 @@ open class BaseFragment<T : ViewBinding> : Fragment() {
     protected fun showMessage(message: String) {
         view?.let {
             Snackbar.make(it, message, Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    protected fun showMessage(message: Int) {
+        showMessage(getString(message))
+    }
+
+    protected fun observeToError(error: MutableLiveData<String?>) {
+        error.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                showMessage(it)
+                error.value = null
+            }
         }
     }
 

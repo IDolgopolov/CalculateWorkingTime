@@ -93,12 +93,7 @@ class TimerFragment : BaseFragment<FragmentTimerBinding>() {
                 .append(it.name)
         }
 
-        viewModel.error.observe(viewLifecycleOwner) { error ->
-            error?.let {
-                showMessage(it)
-                viewModel.error.value = null
-            }
-        }
+        observeToError(viewModel.error)
 
         viewModel.getTodayDate().observe(viewLifecycleOwner) {
             binder.tvTodayDate.text = StringBuilder()

@@ -117,7 +117,7 @@ class TimerFragmentViewModel(app: Application) : AndroidViewModel(app) {
 
         workManager.beginUniqueWork(
             TimerWorker.UNIQUE_NAME,
-            ExistingWorkPolicy.KEEP,
+            ExistingWorkPolicy.REPLACE,
             timerWorkRequest
         )
             .then(saveProgressRequest)

@@ -66,13 +66,13 @@ class RecyclerListProjectsAdapter(
 
     fun add(projects: List<Project>) {
         val startIndex = items.size
-        items.addAll(projects)
+        items.addAll(projects.sortedBy { it.isDeleted })
         notifyItemRangeChanged(startIndex, projects.size)
     }
 
     fun delete(project: Project) {
         val index = items.indexOf(project)
-        items.remove(project)
-        notifyItemRemoved(index)
+        items[index].isDeleted = true
+        notifyItemChanged(index)
     }
 }
